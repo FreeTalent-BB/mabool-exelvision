@@ -100,8 +100,8 @@
 100 If M3E=2 Then CALL COLOR("1WB"):Print Chr$(115);
 101 K1C=K1C+1:If K1C=41 Then K1C=1:L2D=L2D+1
 102 Next H8
-103 CALL COLOR("0GB"):Locate(9,14):Print "PRESS SPACEBAR";
-104 Locate(22,9):Print "BAPTISTE BIDEAUX (c)2022.";
+103 CALL COLOR("0WB"):Locate(9,14):Print "PRESS FIRE";
+104 CALL COLOR("0YB"):Locate(22,9):Print "BAPTISTE BIDEAUX (c)2022.";
 105 Return
 106 Restore 131
 107 For H8=1 To 9
@@ -147,448 +147,451 @@
 147 Data "1WB",19,22,45,46,20,22,82,83,"0CB"
 148 Data 19,26,"LASER SWITCH","0YB",11,6,""
 149 Cls:Locate(10,15):Call Color("0RBH"):Print"LOADING GAME"
-150 Locate(11,15):Print"LOADING GAME":Goto 594
+150 Locate(11,15):Print"LOADING GAME":Goto 597
 151 If K>7 Then K=1
 152 L$=SEG$("RGMCBYW",K,1)
-153 If M=1 Then Restore 485
-154 If M=2 Then Restore 490
-155 If M=3 Then Restore 499
-156 If M=4 Then Restore 505
-157 If M=5 Then Restore 512
-158 If M=6 Then Restore 520
-159 If M=7 Then Restore 527
-160 If M=8 Then Restore 533
-161 If M=9 Then Restore 542
-162 If M=10 Then Restore 548
-163 If M=11 Then Restore 556
-164 If M=12 Then Restore 559
-165 If M=13 Then Restore 565
-166 If M=14 Then Restore 569
-167 If M=15 Then Restore 578
-168 If M=16 Then Restore 586
+153 If M=1 Then Restore 488
+154 If M=2 Then Restore 493
+155 If M=3 Then Restore 502
+156 If M=4 Then Restore 508
+157 If M=5 Then Restore 515
+158 If M=6 Then Restore 523
+159 If M=7 Then Restore 530
+160 If M=8 Then Restore 536
+161 If M=9 Then Restore 545
+162 If M=10 Then Restore 551
+163 If M=11 Then Restore 559
+164 If M=12 Then Restore 562
+165 If M=13 Then Restore 568
+166 If M=14 Then Restore 572
+167 If M=15 Then Restore 581
+168 If M=16 Then Restore 589
 169 Cls:S=1:G=0
-170 If S>160 Then Goto 177
-171 Read G7,A1
-172 For H8=0 To G7-1:T(S+H8)=A1:Next H8
-173 S=S+G7
-174 If S>160 Then Goto 177
-175 Goto 171
-176 Goto 170
-177 Return
-178 Q=4:R=2:F=0:P=0:S=1:B=0:A=0:C=1
-179 Locate(22,12):	Call Color("0RB"):Print "LOADING STAGE...";
-180 I9A=1
-181 Call Color("1"&L$&"B"):Locate(R,Q)
-182 A1=T(S)
-183 If A1=0 Then Goto 186
-184 On A1 Goto 450,452,454,456,461,463,466,468,471,473,475,477,480,483
-185 Goto 186
-186 Q=Q+2:S=S+1
-187 I9A=I9A+1
-188 If I9A=17 Then R=R+2:Q=4:I9A=1
-189 If S<160 Then Goto 181
-190 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
-191 Gosub 394
-192 B2$=""
-193 Return
-194 N=0
-195 If P=0 And F=0 Then Gosub 294
-196 C3=0:Call Key1(N4F,F6)
-197 If N4F=129 And F6=1 And U<34 Then C3=1:Goto 204
-198 If N4F=131 And F6=1 And U>4 Then C3=1:Goto 215
-199 If N4F=130 And F6=1 And V<20 Then C3=1:Goto 237
-200 If N4F=128 And F6=1 And V>2 Then C3=1:Goto 226
-201 if N4F=32 And F6=1 And N>0 Then Goto 336
-202 if Key(0)=115 Then Goto 413
-203 Goto 195
-204 Call Color("1"&L$&"B"):Locate(V,U)
-205 If T(A+1)=14 And C3=1 Then Goto 386
-206 If T(A+1)=7 And C3=1 Then T(A+1)=27:Gosub 212:Gosub 406:Goto 195
-207 If T(A+1)=1 Or T(A+1)=6 Or T(A+1)=7 Then Goto 195
-208 If T(A+1)=27 Or T(A+1)=14 Then Goto 195
-209 C3=0:Gosub 248
-210 A=A+1:U=U+2:Locate(V,U)
-211 Gosub 261:	Goto 204
-212 Locate(V,U+2):Print Chr$(43)&Chr$(47)
-213 Locate(V+1,U+2):print Chr$(84)&Chr$(85)
-214 Return
-215 Call Color("1"&L$&"B"):Locate(V,U)
-216 If T(A-1)=14 And C3=1 Then Goto 378
-217 If T(A-1)=7 And C3=1 Then T(A-1)=27:Gosub 223:Gosub 406:Goto 195
-218 If T(A-1)=1 Or T(A-1)=6 Or T(A-1)=7 Then Goto 195
-219 If T(A-1)=27 Or T(A-1)=14 Then Goto 195
-220 C3=0:Gosub 248
-221 A=A-1:U=U-2:Locate(V,U)
-222 Gosub 261:	Goto 215
-223 Locate(V,U-2):Print Chr$(43)&Chr$(47)
-224 Locate(V+1,U-2):Print Chr$(84)&Chr$(85)
-225 Return
-226 Call Color("1"&L$&"B"):Locate(V,U)
-227 If T(A-16)=14 And C3=1 Then Goto 362
-228 If T(A-16)=7 And C3=1 Then T(A-16)=27:Gosub 234:Gosub 406:Goto 195
-229 If T(A-16)=1 Or T(A-16)=6 Or T(A-16)=7 Then Goto 195
-230 If T(A-16)=27 Or T(A-16)=14 Then Goto 195
-231 C3=0:Gosub 248
-232 A=A-16:V=V-2:Locate(V,U)
-233 Gosub 261:	Goto 226
-234 Locate(V-2,U):Print Chr$(43)&Chr$(47)
-235 Locate(V-1,U):Print Chr$(84)&Chr$(85)
-236 Return
-237 Call Color("1"&L$&"B"):Locate(V,U)
-238 If T(A+16)=14 And C3=1 Then Goto 370
-239 If T(A+16)=7 And C3=1 Then T(A+16)=27:Gosub 245:Gosub 406:Goto 195
-240 If T(A+16)=1 Or T(A+16)=6 Or T(A+16)=7 Then Goto 195
-241 If T(A+16)=27 Or T(A+16)=14 Then Goto 195
-242 C3=0:Gosub 248
-243 A=A+16:V=V+2:Locate(V,U)
-244 Gosub 261:	Goto 237
-245 Locate(V+2,U):Print Chr$(43)&Chr$(47)
-246 Locate(V+3,U):Print Chr$(84)&Chr$(85)
-247 Return
-248 A1=T(A):Locate(V,U)
-249 If A1=0 Then Print Chr$(111)&Chr$(111):Locate(V+1,U):Print Chr$(111)&Chr$(111)
-250 If A1=2 Or A1=8 Then Gosub 255
-251 If A1=3 Then Print Chr$(35)&Chr$(36):Locate(V+1,U):Print Chr$(72)&Chr$(73)
-252 If A1=4 Then Print Chr$(37)&Chr$(38):Locate(V+1,U):Print Chr$(74)&Chr$(75)
-253 If A1=5 Then Gosub 258
-254 Return
-255 Print Chr$(34)&Chr$(34):Locate(V+1,U)
-256 Print Chr$(34)&Chr$(34)
+170 Call Color("0WB"):Locate(1,1):Print Str$(S);
+171 If S>160 Then Goto 180
+172 Read G7,A1
+173 Call Color("0WB"):Locate(2,1):Print Str$(G7)&","&Str$(A1);
+174 For H8=0 To G7-1:T(S+H8)=A1:Next H8
+175 S=S+G7
+176 Call Color("0WB"):Locate(1,1):Print Str$(S);
+177 If S>160 Then Goto 180
+178 Goto 172
+179 Goto 170
+180 Return
+181 Q=4:R=2:F=0:P=0:S=1:B=0:A=0:C=1
+182 Locate(22,12):	Call Color("0RB"):Print "LOADING STAGE...";
+183 I9A=1
+184 Call Color("1"&L$&"B"):Locate(R,Q)
+185 A1=T(S)
+186 If A1=0 Then Goto 189
+187 On A1 Goto 453,455,457,459,464,466,469,471,474,476,478,480,483,486
+188 Goto 189
+189 Q=Q+2:S=S+1
+190 I9A=I9A+1
+191 If I9A=17 Then R=R+2:Q=4:I9A=1
+192 If S<160 Then Goto 184
+193 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
+194 Gosub 397
+195 B2$=""
+196 Return
+197 N=0
+198 If P=0 And F=0 Then Gosub 297
+199 C3=0:Call Key1(N4F,F6)
+200 If N4F=129 And F6=1 And U<34 Then C3=1:Goto 207
+201 If N4F=131 And F6=1 And U>4 Then C3=1:Goto 218
+202 If N4F=130 And F6=1 And V<20 Then C3=1:Goto 240
+203 If N4F=128 And F6=1 And V>2 Then C3=1:Goto 229
+204 if N4F=32 And F6=1 And N>0 Then Goto 339
+205 if Key(0)=115 Then Goto 416
+206 Goto 198
+207 Call Color("1"&L$&"B"):Locate(V,U)
+208 If T(A+1)=14 And C3=1 Then Goto 389
+209 If T(A+1)=7 And C3=1 Then T(A+1)=27:Gosub 215:Gosub 409:Goto 198
+210 If T(A+1)=1 Or T(A+1)=6 Or T(A+1)=7 Then Goto 198
+211 If T(A+1)=27 Or T(A+1)=14 Then Goto 198
+212 C3=0:Gosub 251
+213 A=A+1:U=U+2:Locate(V,U)
+214 Gosub 264:	Goto 207
+215 Locate(V,U+2):Print Chr$(43)&Chr$(47)
+216 Locate(V+1,U+2):print Chr$(84)&Chr$(85)
+217 Return
+218 Call Color("1"&L$&"B"):Locate(V,U)
+219 If T(A-1)=14 And C3=1 Then Goto 381
+220 If T(A-1)=7 And C3=1 Then T(A-1)=27:Gosub 226:Gosub 409:Goto 198
+221 If T(A-1)=1 Or T(A-1)=6 Or T(A-1)=7 Then Goto 198
+222 If T(A-1)=27 Or T(A-1)=14 Then Goto 198
+223 C3=0:Gosub 251
+224 A=A-1:U=U-2:Locate(V,U)
+225 Gosub 264:	Goto 218
+226 Locate(V,U-2):Print Chr$(43)&Chr$(47)
+227 Locate(V+1,U-2):Print Chr$(84)&Chr$(85)
+228 Return
+229 Call Color("1"&L$&"B"):Locate(V,U)
+230 If T(A-16)=14 And C3=1 Then Goto 365
+231 If T(A-16)=7 And C3=1 Then T(A-16)=27:Gosub 237:Gosub 409:Goto 198
+232 If T(A-16)=1 Or T(A-16)=6 Or T(A-16)=7 Then Goto 198
+233 If T(A-16)=27 Or T(A-16)=14 Then Goto 198
+234 C3=0:Gosub 251
+235 A=A-16:V=V-2:Locate(V,U)
+236 Gosub 264:	Goto 229
+237 Locate(V-2,U):Print Chr$(43)&Chr$(47)
+238 Locate(V-1,U):Print Chr$(84)&Chr$(85)
+239 Return
+240 Call Color("1"&L$&"B"):Locate(V,U)
+241 If T(A+16)=14 And C3=1 Then Goto 373
+242 If T(A+16)=7 And C3=1 Then T(A+16)=27:Gosub 248:Gosub 409:Goto 198
+243 If T(A+16)=1 Or T(A+16)=6 Or T(A+16)=7 Then Goto 198
+244 If T(A+16)=27 Or T(A+16)=14 Then Goto 198
+245 C3=0:Gosub 251
+246 A=A+16:V=V+2:Locate(V,U)
+247 Gosub 264:	Goto 240
+248 Locate(V+2,U):Print Chr$(43)&Chr$(47)
+249 Locate(V+3,U):Print Chr$(84)&Chr$(85)
+250 Return
+251 A1=T(A):Locate(V,U)
+252 If A1=0 Then Print Chr$(111)&Chr$(111):Locate(V+1,U):Print Chr$(111)&Chr$(111)
+253 If A1=2 Or A1=8 Then Gosub 258
+254 If A1=3 Then Print Chr$(35)&Chr$(36):Locate(V+1,U):Print Chr$(72)&Chr$(73)
+255 If A1=4 Then Print Chr$(37)&Chr$(38):Locate(V+1,U):Print Chr$(74)&Chr$(75)
+256 If A1=5 Then Gosub 261
 257 Return
-258 Print Chr$(111)&Chr$(111):Locate(V+1,U)
-259 Print Chr$(111)&Chr$(111):T(A)=0
+258 Print Chr$(34)&Chr$(34):Locate(V+1,U)
+259 Print Chr$(34)&Chr$(34)
 260 Return
-261 A1=T(A):Locate(V,U)
-262 If A1=0 Then Gosub 273:Goto 413
-263 If A1=2 Then Print Chr$(50)&Chr$(51):Locate(V+1,U):Print Chr$(88)&Chr$(89)
-264 If A1=3 Then Gosub 275:Goto 304
-265 If A1=4 Then Gosub 277:Goto 297
-266 If A1=5 Then Print Chr$(56)&Chr$(57):Locate(V+1,U):Print Chr$(94)&Chr$(95)
-267 If A1=9 Then Gosub 279:Gosub 292:Goto 195
-268 If A1=10 Then Gosub 282:Gosub 293:Goto 195
-269 If A1=11 Then Gosub 285:N=N+1:Goto 195
-270 If A1=26 Then Gosub 288:Goto 424
-271 If A1=12 Or A1=13 Then Gosub 290:Goto 413
-272 Return
-273 Print Chr$(48)&Chr$(49):Locate(V+1,U)
-274 print Chr$(86)&Chr$(87):Return
-275 Print Chr$(52)&Chr$(53):Locate(V+1,U)
-276 Print Chr$(90)&Chr$(91):Return
-277 Print Chr$(54)&Chr$(55):Locate(V+1,U)
-278 Print Chr$(92)&Chr$(93):Return
-279 Print Chr$(50)&Chr$(51):Locate(V+1,U)
-280 Print Chr$(88)&Chr$(89):T(A)=2
-281 Return
+261 Print Chr$(111)&Chr$(111):Locate(V+1,U)
+262 Print Chr$(111)&Chr$(111):T(A)=0
+263 Return
+264 A1=T(A):Locate(V,U)
+265 If A1=0 Then Gosub 276:Goto 416
+266 If A1=2 Then Print Chr$(50)&Chr$(51):Locate(V+1,U):Print Chr$(88)&Chr$(89)
+267 If A1=3 Then Gosub 278:Goto 307
+268 If A1=4 Then Gosub 280:Goto 300
+269 If A1=5 Then Print Chr$(56)&Chr$(57):Locate(V+1,U):Print Chr$(94)&Chr$(95)
+270 If A1=9 Then Gosub 282:Gosub 295:Goto 198
+271 If A1=10 Then Gosub 285:Gosub 296:Goto 198
+272 If A1=11 Then Gosub 288:N=N+1:Goto 198
+273 If A1=26 Then Gosub 291:Goto 427
+274 If A1=12 Or A1=13 Then Gosub 293:Goto 416
+275 Return
+276 Print Chr$(48)&Chr$(49):Locate(V+1,U)
+277 print Chr$(86)&Chr$(87):Return
+278 Print Chr$(52)&Chr$(53):Locate(V+1,U)
+279 Print Chr$(90)&Chr$(91):Return
+280 Print Chr$(54)&Chr$(55):Locate(V+1,U)
+281 Print Chr$(92)&Chr$(93):Return
 282 Print Chr$(50)&Chr$(51):Locate(V+1,U)
-283 Locate(V+1,U):Print Chr$(88)&Chr$(89)
-284 T(A)=2:Return
+283 Print Chr$(88)&Chr$(89):T(A)=2
+284 Return
 285 Print Chr$(50)&Chr$(51):Locate(V+1,U)
-286 print Chr$(88)&Chr$(89):T(A)=2
-287 Return
-288 Print Chr$(54)&Chr$(55):Locate(V+1,U)
-289 Print Chr$(92)&Chr$(93):return
-290 Print Chr$(48)&Chr$(49):Locate(V+1,U)
-291 Print Chr$(86)&Chr$(87):Return
-292 W=W+10:Gosub 394:F=F-1:	Return
-293 W=W+10:Gosub 394:P=P-1:Return
-294 Call Color("1"&L$&"B"):T(B)=26:Locate(Z0,Y)
-295 Print Chr$(43)&Chr$(44):Locate(Z0+1,Y):print Chr$(80)&Chr$(81)
-296 P=-1:F=-1:Return
-297 D=1
-298 Locate(V,U):Print Chr$(37)&Chr$(38):Locate(V+1,U):Print Chr$(74)&Chr$(75)
-299 If U=E(1) And V=E(2) Then D=4
-300 U=E(D):V=E(D+1):A=E(D+2)
-301 Locate(V,U):Gosub 302:goto 195
-302 Print Chr$(54)&Chr$(55):Locate(V+1,U)
-303 Print Chr$(92)&Chr$(93):Return
-304 Gosub 333
-305 If T(A-1)=0 Then Goto 309
-306 If T(A+1)=0 Then Goto 315
-307 If T(A-16)=0 Then Goto 321
-308 If T(A+16)=0 Then Goto 327
-309 If T(A-1)<>0 Or U=4 Then Goto 195
-310 U=U-2:A=A-1
-311 Gosub 333
-312 T(A+1)=0	:Locate(V,U+2)
-313 Print Chr$(111)&Chr$(111):Locate(V+1,U+2):Print Chr$(111)&Chr$(111)
-314 Goto 309
-315 If T(A+1)<>0 Or U=34 Then Goto 195
-316 U=U+2:A=A+1
-317 Gosub 333
-318 T(A-1)=0:Locate(V,U-2)
-319 Print Chr$(111)&Chr$(111):Locate(V+1,U-2):Print Chr$(111)&Chr$(111)
-320 Goto 315
-321 If T(A-16)<>0 Or V=2 Then Goto 195
-322 V=V-2:A=A-16
-323 Gosub 333
-324 T(A+16)=0:Locate(V+2,U)
-325 Print Chr$(111)&Chr$(111):Locate(V+3,U):Print Chr$(111)&Chr$(111)
-326 Goto 321
-327 If T(A+16)<>0 Or V=20 Then Goto 195
-328 V=V+2:A=A+16
-329 Gosub 333
-330 T(A-16)=0:Locate(V-2,U)
-331 Print Chr$(111)&Chr$(111):Locate(V-1,U):Print Chr$(111)&Chr$(111)
-332 Goto 327
-333 Locate(V,U):Print Chr$(52)&Chr$(53)
-334 Locate(V+1,U):Print Chr$(90)&Chr$(91)
-335 T(A)=3:Return
-336 N=N-1:Call Color("1WB")
-337 If V>2 Then Gosub 342
-338 If V<20 Then Gosub 347
-339 If U>4 Then Gosub 352
-340 If U<34 Then Gosub 357
-341 goto 195
-342 If T(A-16)=1 Then T(A-16)=2:Gosub 344
-343 Return
-344 Locate(V-2,U):Print Chr$(34)&Chr$(34)
-345 Locate(V-1,U):Print Chr$(34)&Chr$(34)
+286 Locate(V+1,U):Print Chr$(88)&Chr$(89)
+287 T(A)=2:Return
+288 Print Chr$(50)&Chr$(51):Locate(V+1,U)
+289 print Chr$(88)&Chr$(89):T(A)=2
+290 Return
+291 Print Chr$(54)&Chr$(55):Locate(V+1,U)
+292 Print Chr$(92)&Chr$(93):return
+293 Print Chr$(48)&Chr$(49):Locate(V+1,U)
+294 Print Chr$(86)&Chr$(87):Return
+295 W=W+10:Gosub 397:F=F-1:	Return
+296 W=W+10:Gosub 397:P=P-1:Return
+297 Call Color("1"&L$&"B"):T(B)=26:Locate(Z0,Y)
+298 Print Chr$(43)&Chr$(44):Locate(Z0+1,Y):print Chr$(80)&Chr$(81)
+299 P=-1:F=-1:Return
+300 D=1
+301 Locate(V,U):Print Chr$(37)&Chr$(38):Locate(V+1,U):Print Chr$(74)&Chr$(75)
+302 If U=E(1) And V=E(2) Then D=4
+303 U=E(D):V=E(D+1):A=E(D+2)
+304 Locate(V,U):Gosub 305:goto 198
+305 Print Chr$(54)&Chr$(55):Locate(V+1,U)
+306 Print Chr$(92)&Chr$(93):Return
+307 Gosub 336
+308 If T(A-1)=0 Then Goto 312
+309 If T(A+1)=0 Then Goto 318
+310 If T(A-16)=0 Then Goto 324
+311 If T(A+16)=0 Then Goto 330
+312 If T(A-1)<>0 Or U=4 Then Goto 198
+313 U=U-2:A=A-1
+314 Gosub 336
+315 T(A+1)=0	:Locate(V,U+2)
+316 Print Chr$(111)&Chr$(111):Locate(V+1,U+2):Print Chr$(111)&Chr$(111)
+317 Goto 312
+318 If T(A+1)<>0 Or U=34 Then Goto 198
+319 U=U+2:A=A+1
+320 Gosub 336
+321 T(A-1)=0:Locate(V,U-2)
+322 Print Chr$(111)&Chr$(111):Locate(V+1,U-2):Print Chr$(111)&Chr$(111)
+323 Goto 318
+324 If T(A-16)<>0 Or V=2 Then Goto 198
+325 V=V-2:A=A-16
+326 Gosub 336
+327 T(A+16)=0:Locate(V+2,U)
+328 Print Chr$(111)&Chr$(111):Locate(V+3,U):Print Chr$(111)&Chr$(111)
+329 Goto 324
+330 If T(A+16)<>0 Or V=20 Then Goto 198
+331 V=V+2:A=A+16
+332 Gosub 336
+333 T(A-16)=0:Locate(V-2,U)
+334 Print Chr$(111)&Chr$(111):Locate(V-1,U):Print Chr$(111)&Chr$(111)
+335 Goto 330
+336 Locate(V,U):Print Chr$(52)&Chr$(53)
+337 Locate(V+1,U):Print Chr$(90)&Chr$(91)
+338 T(A)=3:Return
+339 N=N-1:Call Color("1WB")
+340 If V>2 Then Gosub 345
+341 If V<20 Then Gosub 350
+342 If U>4 Then Gosub 355
+343 If U<34 Then Gosub 360
+344 goto 198
+345 If T(A-16)=1 Then T(A-16)=2:Gosub 347
 346 Return
-347 If T(A+16)=1 Then T(A+16)=2:Gosub 349
-348 Return
-349 Locate(V+2,U):Print Chr$(34)&Chr$(34)
-350 Locate(V+3,U):Print Chr$(34)&Chr$(34)
+347 Locate(V-2,U):Print Chr$(34)&Chr$(34)
+348 Locate(V-1,U):Print Chr$(34)&Chr$(34)
+349 Return
+350 If T(A+16)=1 Then T(A+16)=2:Gosub 352
 351 Return
-352 If T(A-1)=1 Then T(A-1)=2:Gosub 354
-353 Return
-354 Locate(V,U-2):Print Chr$(34)&Chr$(34)
-355 Locate(V+1,U-2):Print Chr$(34)&Chr$(34)
+352 Locate(V+2,U):Print Chr$(34)&Chr$(34)
+353 Locate(V+3,U):Print Chr$(34)&Chr$(34)
+354 Return
+355 If T(A-1)=1 Then T(A-1)=2:Gosub 357
 356 Return
-357 If T(A+1)=1 Then T(A+1)=2:Gosub 359
-358 Return
-359 Locate(V,U+2):Print Chr$(34)&Chr$(34)
-360 Locate(V+1,U+2):Print Chr$(34)&Chr$(34)
+357 Locate(V,U-2):Print Chr$(34)&Chr$(34)
+358 Locate(V+1,U-2):Print Chr$(34)&Chr$(34)
+359 Return
+360 If T(A+1)=1 Then T(A+1)=2:Gosub 362
 361 Return
-362 If V=2 Or (T(A-32)<>2 And T(A-32)<>8) Then Goto 195
-363 T(A-16)=2:T(A-32)=14
-364 Gosub 248
-365 Locate(V-2,U):Print Chr$(50)&Chr$(51):Locate(V-1,U):Print Chr$(88)&Chr$(89)
-366 Locate(V-4,U):Print Chr$(112)&Chr$(113)
-367 Locate(V-3,U):Print Chr$(116)&Chr$(117)
-368 V=V-2:Locate(V,U):A=A-16:Gosub 261
-369 Goto 195
-370 If V=20 Or (T(A+32)<>2 And T(A+32)<>8) Then Goto 195
-371 T(A+16)=2:T(A+32)=14
-372 Gosub 248
-373 Locate(V+2,U):Print Chr$(50)&Chr$(51):Locate(V+3,U):Print Chr$(88)&Chr$(89)
-374 Locate(V+4,U):Print Chr$(112)&Chr$(113)
-375 Locate(V+5,U):Print Chr$(116)&Chr$(117)
-376 V=V+2:Locate(V,U):A=A+16:Gosub 261
-377 Goto 195
-378 If U=4 Or (T(A-2)<>2 And T(A-2)<>8) Then Goto 195
-379 T(A-1)=2:T(A-2)=14
-380 Gosub 248
-381 Locate(V,U-2):Print Chr$(50)&Chr$(51):Locate(V+1,U-2):Print Chr$(88)&Chr$(89)
-382 Locate(V,U-4):Print Chr$(112)&Chr$(113)
-383 Locate(V+1,U-4):Print Chr$(116)&Chr$(117)
-384 U=U-2:Locate(V,U):A=A-1:Gosub 261
-385 Goto 195
-386 If U=32 Or (T(A+2)<>2 And T(A+2)<>8) Then Goto 195
-387 T(A+1)=2:T(A+2)=14
-388 Gosub 248
-389 Locate(V,U+2):Print Chr$(50)&Chr$(51):Locate(V+1,U+2):Print Chr$(88)&Chr$(89)
-390 Locate(V,U+4):Print Chr$(112)&Chr$(113)
-391 Locate(V+1,U+4):Print Chr$(116)&Chr$(117)
-392 U=U+2:Locate(V,U):A=A+1:Gosub 261
-393 Goto 195
-394 Call Color("0WB"):Locate(22,5)
-395 B2$=Str$(W)
-396 If Len(B2$)<6 Then For H8=Len(B2$) To 6:B2$="0"&B2$:Next H8
-397 Print "SCORE "&B2$;
-398 B2$=Str$(M)
-399 If Len(B2$)<2 Then B2$="0"&B2$
-400 Print " STAGE "&B2$;
-401 B2$=Str$(X)
+362 Locate(V,U+2):Print Chr$(34)&Chr$(34)
+363 Locate(V+1,U+2):Print Chr$(34)&Chr$(34)
+364 Return
+365 If V=2 Or (T(A-32)<>2 And T(A-32)<>8) Then Goto 198
+366 T(A-16)=2:T(A-32)=14
+367 Gosub 251
+368 Locate(V-2,U):Print Chr$(50)&Chr$(51):Locate(V-1,U):Print Chr$(88)&Chr$(89)
+369 Locate(V-4,U):Print Chr$(112)&Chr$(113)
+370 Locate(V-3,U):Print Chr$(116)&Chr$(117)
+371 V=V-2:Locate(V,U):A=A-16:Gosub 264
+372 Goto 198
+373 If V=20 Or (T(A+32)<>2 And T(A+32)<>8) Then Goto 198
+374 T(A+16)=2:T(A+32)=14
+375 Gosub 251
+376 Locate(V+2,U):Print Chr$(50)&Chr$(51):Locate(V+3,U):Print Chr$(88)&Chr$(89)
+377 Locate(V+4,U):Print Chr$(112)&Chr$(113)
+378 Locate(V+5,U):Print Chr$(116)&Chr$(117)
+379 V=V+2:Locate(V,U):A=A+16:Gosub 264
+380 Goto 198
+381 If U=4 Or (T(A-2)<>2 And T(A-2)<>8) Then Goto 198
+382 T(A-1)=2:T(A-2)=14
+383 Gosub 251
+384 Locate(V,U-2):Print Chr$(50)&Chr$(51):Locate(V+1,U-2):Print Chr$(88)&Chr$(89)
+385 Locate(V,U-4):Print Chr$(112)&Chr$(113)
+386 Locate(V+1,U-4):Print Chr$(116)&Chr$(117)
+387 U=U-2:Locate(V,U):A=A-1:Gosub 264
+388 Goto 198
+389 If U=32 Or (T(A+2)<>2 And T(A+2)<>8) Then Goto 198
+390 T(A+1)=2:T(A+2)=14
+391 Gosub 251
+392 Locate(V,U+2):Print Chr$(50)&Chr$(51):Locate(V+1,U+2):Print Chr$(88)&Chr$(89)
+393 Locate(V,U+4):Print Chr$(112)&Chr$(113)
+394 Locate(V+1,U+4):Print Chr$(116)&Chr$(117)
+395 U=U+2:Locate(V,U):A=A+1:Gosub 264
+396 Goto 198
+397 Call Color("0WB"):Locate(22,5)
+398 B2$=Str$(W)
+399 If Len(B2$)<6 Then For H8=Len(B2$) To 6:B2$="0"&B2$:Next H8
+400 Print "SCORE "&B2$;
+401 B2$=Str$(M)
 402 If Len(B2$)<2 Then B2$="0"&B2$
-403 Print " LIVES "&B2$;
-404 B2$=""
-405 Return
-406 For H8=1 To G
-407 T(J(H8))=2
-408 Call Color("1"&L$&"B"):Locate(I(H8),H(H8))
-409 Print Chr$(34)&Chr$(34):Locate(I(H8)+1,H(H8))
-410 Print Chr$(34)&Chr$(34)
-411 Next H8
-412 Return
-413 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
-414 Locate(22,13):Print "HAAAAAaaaaa...";
-415 X=X-1
-416 For H8=1 To 10:Next H8
-417 If X=0 Then Goto 432
-418 goto 594
-419 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
-420 Locate(22,15):Print "EXTRA LIFE!";
-421 J0B=0:	X=X+1
-422 For H8=1 To 10:Next H8
-423 goto 594
-424 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
-425 Locate(22,15):Print "NICE JOB!"
-426 K=K+1
-427 If K>7 Then K=1
-428 For H8=1 To 50:Next H8
-429 M=M+1:If M>16 Then Goto 441
-430 J0B=J0B+1:If J0B=5 Then goto 419
-431 goto 594
-432 Cls:Locate(9,18):Call Color("0RBH"):Print"GAME"
-433 Locate(10,18):Call Color("0RBH"):Print"GAME"
-434 Locate(11,18):Call Color("0RBH"):Print"OVER"
-435 Locate(12,18):Call Color("0RBH"):Print"OVER"
-436 Call Color("0WBH"):Locate(17,5):Print "FINAL SCORE:"&Str$(W)
-437 Locate(18,5):Print "FINAL SCORE:"&Str$(W)
-438 For H8=1 To 50:Next H8
-439 M=1:K=1:X=4:W=0
-440 Goto 594
-441 Cls:Locate(9,13):Call Color("0GBH"):Print"CONGRATULATIONS!"
-442 Locate(10,13):Call Color("0GBH"):Print"CONGRATULATIONS!"
-443 Locate(11,5):Call Color("0YBH"):Print"THANK YOU FOR PLAYING MABOOL!"
-444 Locate(12,5):Call Color("0YBH"):Print"THANK YOU FOR PLAYING MABOOL!"
-445 Call Color("0WBH"):Locate(17,5):Print "FINAL SCORE:"&Str$(W)
-446 Locate(18,5):Print "FINAL SCORE:"&Str$(W)
-447 For H8=1 To 5000:Next H8
-448 M=1:K=1:X=4:W=0
-449 Goto 594
-450 Print Chr$(118)&Chr$(33):Locate(R+1,Q)
-451 Print Chr$(70)&Chr$(71):Goto 186
-452 Print Chr$(34)&Chr$(34):Locate(R+1,Q)
-453 Print Chr$(34)&Chr$(34):Goto 186
-454 Print Chr$(35)&Chr$(36):Locate(R+1,Q)
-455 Print Chr$(72)&Chr$(73):Goto 186
-456 Print Chr$(37)&Chr$(38):Locate(R+1,Q)
-457 Print Chr$(74)&Chr$(75)
-458 E(C)=Q:E(C+1)=R
-459 E(C+2)=S:C=C+3
-460 Goto 186
-461 Print Chr$(39)&Chr$(40):Locate(R+1,Q)
-462 Print Chr$(76)&Chr$(77):Goto 186
-463 Print Chr$(41)&Chr$(42):Locate(R+1,Q)
-464 Print Chr$(78)&Chr$(79)
-465 Y=Q:Z0=R:B=S:Goto 186
-466 Print Chr$(45)&Chr$(46):Locate(R+1,Q)
-467 Print Chr$(82)&Chr$(83):Goto 186
-468 Print Chr$(50)&Chr$(51):Locate(R+1,Q)
-469 Print Chr$(88)&Chr$(89)
-470 U=Q:V=R:A=S:T(A)=2:Goto 186
-471 Print Chr$(60)&Chr$(61):Locate(R+1,Q)
-472 Print Chr$(98)&Chr$(99):F=F+1:Goto 186
-473 Print Chr$(64)&Chr$(65):Locate(R+1,Q)
-474 Print Chr$(102)&Chr$(103):P=P+1:Goto 186
-475 Print Chr$(68)&Chr$(69):Locate(R+1,Q)
-476 Print Chr$(106)&Chr$(107):Goto 186
-477 Print Chr$(108)&Chr$(109):Locate(R+1,Q)
-478 Print Chr$(108)&Chr$(109):G=G+1
-479 J(G)=S:H(G)=Q:I(G)=R:Goto 186
-480 Print Chr$(110)&Chr$(110):Locate(R+1,Q)
-481 Print Chr$(114)&Chr$(114):G=G+1
-482 J(G)=S:H(G)=Q:I(G)=R:Goto 186
-483 Print Chr$(112)&Chr$(113):Locate(R+1,Q)
-484 Print Chr$(116)&Chr$(117):Goto 186
-485 DATA 36,0,2,2,1,9,14,0,2,2,1,0,1,10,1,2
-486 DATA 1,9,1,6,8,0,1,9,1,2,1,9,1,2,1,8
-487 DATA 1,9,2,2,8,0,4,2,1,0,2,2,9,0,1,9
-488 DATA 1,2,1,9,1,2,1,0,1,2,2,9,13,0,1,9
-489 DATA 1,2,1,9,36,0
-490 DATA 20,0,1,1,6,0,1,1,5,0,1,2,1,9,1,2
-491 DATA 1,3,7,0,1,2,1,9,1,2,3,0,1,2,1,0
-492 DATA 1,1,1,0,1,2,1,9,1,2,1,9,1,0,1,1
-493 DATA 1,0,1,2,3,0,1,2,2,9,1,0,6,2,1,0
-494 DATA 3,2,1,0,1,2,1,9,1,8,6,2,2,9,3,2
-495 DATA 1,10,1,2,1,0,1,9,1,2,1,9,1,0,2,2
-496 DATA 1,9,2,2,1,9,1,0,3,2,3,0,1,2,3,0
-497 DATA 4,2,3,0,1,2,3,0,1,2,1,9,1,2,8,0
-498 DATA 1,2,1,6,1,2,17,0
-499 DATA 21,0,6,1,10,0,1,1,1,8,1,2,1,9,1,2
-500 DATA 1,1,6,0,6,1,2,2,6,1,2,0,1,1,1,10
-501 DATA 2,2,1,5,1,2,1,9,2,2,1,1,1,6,2,2,1
-502 DATA 1,2,0,1,1,2,2,1,4,1,1,3,2,1,9
-503 DATA 1,5,3,2,1,1,2,0,5,1,1,9,3,2,5,1,6
-504 DATA 0,1,1,3,2,1,4,1,1,10,0,6,1,21,0
-505 DATA 17,0,1,2,1,10,4,2,1,9,1,1,1,6,5,2,2
-506 DATA 0,1,2,1,0,4,2,1,11,2,1,1,8,2,2,1,3
-507 DATA 1,2,18,0,1,2,1,0,1,9,8,2,1,9,1,0,1
-508 DATA 2,2,0,1,2,1,0,1,9,1,2,1,3,3,2,1,0
-509 DATA 2,2,1,9,1,0,1,2,18,0,1,2,1,3,2,2,1
-510 DATA 0,1,2,1,1,1,2,1,3,3,2,1,0,1,2,2,0
-511 DATA 6,2,1,1,1,2,1,9,3,2,1,9,1,2,17,0
-512 DATA 2,0,1,1,8,0,1,1,5,0,1,4,1,3,9,0,1,2
-513 DATA 2,9,2,0,1,2,1,9,2,2,1,9,5,0,1,10,2
-514 DATA 2,1,9,2,0,1,9,3,2,1,9,5,0,1,9,1,2,1
-515 DATA 9,1,2,2,0,1,2,1,3,3,2,2,5,1,9,8,0,1
-516 DATA 5,6,0,1,5,1,0,1,9,3,2,1,6,2,0,1,2,1
-517 DATA 0,2,2,3,0,1,9,1,5,2,2,1,9,2,2,2,0,1
-518 DATA 2,1,9,1,2,1,9,5,0,2,2,2,9,1,2,2,0,1
-519 DATA 9,2,2,1,9,5,0,1,8,3,2,1,4,17,0
-520 DATA 19,0,1,1,2,0,1,6,1,2,2,9,8,0,1,1,1,3,3
-521 DATA 0,2,2,1,9,2,5,1,9,5,0,1,2,1,0,1,2,1,0
-522 DATA 2,2,1,4,1,9,2,0,1,5,5,0,1,2,1,3,1,2,2
-523 DATA 0,1,5,3,0,3,2,4,0,3,2,2,0,1,5,3,0,1,2
-524 DATA 1,3,1,2,5,0,1,5,2,0,2,9,1,2,1,10,1,0
-525 DATA 1,2,1,0,1,2,5,0,1,9,2,5,2,9,1,2,3,0,1
-526 DATA 3,1,1,8,0,1,2,1,4,1,2,1,8,2,0,1,1,19,0
-527 DATA 17,0,1,8,6,5,1,9,6,5,2,0,5,5,1,4,4,5,1
-528 DATA 9,1,5,1,9,1,5,2,0,1,9,1,5,1,9,2,5,1,9,1
-529 DATA 5,1,2,1,4,5,5,2,0,2,5,1,2,2,5,1,3,8,5,2
-530 DATA 0,2,5,1,9,4,5,1,9,6,5,2,0,5,5,1,9,2,5,1
-531 DATA 9,1,5,1,9,3,5,2,0,1,9,4,5,1,2,6,5,1,9,1
-532 DATA 5,2,0,5,5,1,10,7,5,1,6,17,0
-533 DATA 1,0,2,1,3,0,1,10,2,2,1,6,2,0,3,2,2,0,1,1
-534 DATA 1,3,3,0,1,5,1,2,1,0,1,3,3,0,1,2,1,9,7,0
-535 DATA 1,2,2,0,1,1,2,0,1,2,1,3,1,9,7,0,2,9,1,3
-536 DATA 1,2,1,0,2,2,4,0,1,2,1,3,1,2,2,0,3,2,1,3,2
-537 DATA 0,1,2,4,0,1,2,1,9,1,3,3,0,2,9,1,2,1,8,1,9
-538 DATA 1,2,1,0,1,1,2,0,1,2,1,5,1,2,2,0,1,2,1,3,2
-539 DATA 2,1,0,1,5,1,0,2,1,2,0,1,1,1,5,3,0,1,1,4,0
-540 DATA 1,5,5,0,1,1,4,0,1,3,1,9,3,5,1,9,5,0,2,1,3
-541 DATA 0,1,1,9,0
-542 DATA 17,0,1,8,8,2,2,9,2,2,1,9,2,0,1,2,12,5,1,2
-543 DATA 2,0,1,2,1,5,3,2,1,9,6,2,1,5,1,9,2,0,1,2,1
-544 DATA 5,1,2,8,5,1,2,1,5,1,2,2,0,1,2,1,5,1,2,8,5
-545 DATA 1,2,1,5,1,2,2,0,1,9,1,5,7,2,2,9,1,2,1,5,1
-546 DATA 9,2,0,1,2,12,5,1,2,2,0,1,9,4,2,1,9,1,2,1
-547 DATA 6,5,2,1,10,17,0
-548 DATA 3,0,1,9,8,5,1,1,6,0,1,5,5,0,6,1,2,0,6,1,2
-549 DATA 0,1,1,1,2,1,11,2,2,1,7,2,0,1,1,1,11,1,9,2
-550 DATA 2,4,1,4,13,1,1,2,0,1,1,1,2,1,9,2,2,1,12,2
-551 DATA 5,1,12,1,9,1,2,2,9,1,1,2,0,1,1,1,11,1,2,1
-552 DATA 8,1,9,1,12,2,5,1,12,3,2,1,9,1,1,2,0,1,1,4
-553 DATA 13,4,1,2,2,1,9,1,2,1,1,2,0,1,1,1,11,1,10
-554 DATA 2,2,1,1,2,0,6,1,2,0,6,1,5,0,1,5,6,0,1,6,8
-555 DATA 2,1,9,3,0
-556 DATA 37,0,1,6,2,2,1,9,1,2,1,9,10,0,1,2,1,9,2,14
-557 DATA 2,2,10,0,1,10,1,14,1,8,1,5,1,2,1,9,10,0,1
-558 DATA 2,2,14,1,9,2,2,10,0,1,2,1,9,4,2,53,0
-559 DATA 17,0,14,1,2,0,1,1,11,5,2,1,2,0,1,1,1,5,9,1
-560 DATA 1,9,1,5,1,1,2,0,1,1,10,5,1,11,1,5,1,1,2,0
-561 DATA 2,1,1,5,1,10,1,2,1,1,1,2,4,0,1,3,1,2,1,1,2
-562 DATA 0,1,1,1,8,1,1,1,6,2,5,1,9,1,1,3,5,1,9,1,5
-563 DATA 1,1,2,0,1,1,4,5,1,1,4,5,1,1,2,5,1,1,2,0,14
-564 DATA 1,17,0
-565 DATA 36,0,1,2,1,10,5,2,1,9,8,0,3,1,2,14,1,1,2
-566 DATA 2,8,0,1,2,1,14,4,2,1,14,1,11,8,0,1,11,1
-567 DATA 14,1,2,1,8,2,2,1,14,1,2,8,0,2,2,1,1,2,14
-568 DATA 3,1,8,0,6,2,1,6,1,2,36,0
-569 DATA 17,1,1,2,1,9,3,2,1,5,3,2,1,4,1,9,2,1,1,9
-570 DATA 2,1,2,13,6,1,2,2,1,14,1,12,1,10,1,2,2,1,2
-571 DATA 2,1,1,1,11,1,2,1,1,1,2,3,1,1,2,1,12,2,2,2
-572 DATA 1,2,2,1,1,1,7,1,1,1,11,1,2,1,5,1,8,1,1,1
-573 DATA 2,1,12,1,9,1,2,2,1,2,2,1,1,1,4,1,2,2,14
-574 DATA 1,5,1,6,1,1,1,2,1,12,2,2,2,1,2,2,1,1,1,9
-575 DATA 1,2,2,9,3,1,1,2,1,12,1,2,1,9,2,1,2,13,6
-576 DATA 1,1,2,2,14,1,12,2,2,2,1,1,2,1,9,2,2,1,1
-577 DATA 1,12,2,2,1,9,1,2,1,14,1,12,1,9,1,2,17,1
-578 DATA 16,0,1,6,3,5,1,1,2,2,1,10,1,2,1,9,2,2,2
-579 DATA 5,1,9,5,0,1,9,4,2,1,9,1,2,1,8,1,0,1,1,1
-580 DATA 5,2,0,1,9,3,5,1,9,2,2,1,9,2,2,1,9,1,0,1
-581 DATA 5,1,9,2,0,1,5,1,0,1,9,1,1,1,5,1,1,1,0,1
-582 DATA 5,1,0,1,1,2,5,1,9,3,0,1,5,1,0,1,2,1,0
-583 DATA 1,9,2,5,1,9,2,5,1,1,5,0,1,5,1,0,1,2,6,0
-584 DATA 1,5,6,0,1,9,1,5,1,9,5,0,1,1,1,5,7,0,1,1
-585 DATA 1,3,6,0,1,11,8,0,1,1,5,0,1,1,6,0
-586 DATA 17,0,2,9,1,2,2,0,4,1,2,0,1,9,1,2,1,9,2
-587 DATA 0,1,9,1,2,9,0,1,3,1,10,1,2,2,0,1,2,1,3
-588 DATA 1,9,1,0,1,2,1,9,3,2,1,9,1,0,1,2,1,0,1
-589 DATA 9,5,0,1,4,3,2,1,9,3,2,8,0,1,9,5,2,1,9
-590 DATA 1,6,5,0,1,2,1,0,1,9,1,0,1,2,1,9,1,2,1,9
-591 DATA 2,2,1,9,1,5,1,3,1,9,2,0,1,9,1,2,1,3,9,0
-592 DATA 1,9,1,2,2,0,2,9,1,2,2,0,4,1,2,0,1,4,1,9
-593 DATA 1,8,17,0
-594 Gosub 151:	Gosub 178:	Goto 194
+403 Print " STAGE "&B2$;
+404 B2$=Str$(X)
+405 If Len(B2$)<2 Then B2$="0"&B2$
+406 Print " LIVES "&B2$;
+407 B2$=""
+408 Return
+409 For H8=1 To G
+410 T(J(H8))=2
+411 Call Color("1"&L$&"B"):Locate(I(H8),H(H8))
+412 Print Chr$(34)&Chr$(34):Locate(I(H8)+1,H(H8))
+413 Print Chr$(34)&Chr$(34)
+414 Next H8
+415 Return
+416 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
+417 Locate(22,13):Print "HAAAAAaaaaa...";
+418 X=X-1
+419 For H8=1 To 150:Next H8
+420 If X=0 Then Goto 435
+421 goto 597
+422 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
+423 Locate(22,15):Print "EXTRA LIFE!";
+424 J0B=0:	X=X+1
+425 For H8=1 To 150:Next H8
+426 goto 597
+427 Call Color("0WB"):Locate(22,1):Print RPT$(" ",39);
+428 Locate(22,15):Print "NICE JOB!"
+429 K=K+1
+430 If K>7 Then K=1
+431 For H8=1 To 150:Next H8
+432 M=M+1:If M>16 Then Goto 444
+433 J0B=J0B+1:If J0B=5 Then goto 422
+434 goto 597
+435 Cls:Locate(9,18):Call Color("0RBH"):Print"GAME"
+436 Locate(10,18):Call Color("0RBH"):Print"GAME"
+437 Locate(11,18):Call Color("0RBH"):Print"OVER"
+438 Locate(12,18):Call Color("0RBH"):Print"OVER"
+439 Call Color("0WBH"):Locate(17,5):Print "FINAL SCORE:"&Str$(W)
+440 Locate(18,5):Print "FINAL SCORE:"&Str$(W)
+441 For H8=1 To 50:Next H8
+442 M=1:K=1:X=4:W=0
+443 Goto 597
+444 Cls:Locate(9,13):Call Color("0GBH"):Print"CONGRATULATIONS!"
+445 Locate(10,13):Call Color("0GBH"):Print"CONGRATULATIONS!"
+446 Locate(11,5):Call Color("0YBH"):Print"THANK YOU FOR PLAYING MABOOL!"
+447 Locate(12,5):Call Color("0YBH"):Print"THANK YOU FOR PLAYING MABOOL!"
+448 Call Color("0WBH"):Locate(17,5):Print "FINAL SCORE:"&Str$(W)
+449 Locate(18,5):Print "FINAL SCORE:"&Str$(W)
+450 For H8=1 To 5000:Next H8
+451 M=1:K=1:X=4:W=0
+452 Goto 597
+453 Print Chr$(118)&Chr$(33):Locate(R+1,Q)
+454 Print Chr$(70)&Chr$(71):Goto 189
+455 Print Chr$(34)&Chr$(34):Locate(R+1,Q)
+456 Print Chr$(34)&Chr$(34):Goto 189
+457 Print Chr$(35)&Chr$(36):Locate(R+1,Q)
+458 Print Chr$(72)&Chr$(73):Goto 189
+459 Print Chr$(37)&Chr$(38):Locate(R+1,Q)
+460 Print Chr$(74)&Chr$(75)
+461 E(C)=Q:E(C+1)=R
+462 E(C+2)=S:C=C+3
+463 Goto 189
+464 Print Chr$(39)&Chr$(40):Locate(R+1,Q)
+465 Print Chr$(76)&Chr$(77):Goto 189
+466 Print Chr$(41)&Chr$(42):Locate(R+1,Q)
+467 Print Chr$(78)&Chr$(79)
+468 Y=Q:Z0=R:B=S:Goto 189
+469 Print Chr$(45)&Chr$(46):Locate(R+1,Q)
+470 Print Chr$(82)&Chr$(83):Goto 189
+471 Print Chr$(50)&Chr$(51):Locate(R+1,Q)
+472 Print Chr$(88)&Chr$(89)
+473 U=Q:V=R:A=S:T(A)=2:Goto 189
+474 Print Chr$(60)&Chr$(61):Locate(R+1,Q)
+475 Print Chr$(98)&Chr$(99):F=F+1:Goto 189
+476 Print Chr$(64)&Chr$(65):Locate(R+1,Q)
+477 Print Chr$(102)&Chr$(103):P=P+1:Goto 189
+478 Print Chr$(68)&Chr$(69):Locate(R+1,Q)
+479 Print Chr$(106)&Chr$(107):Goto 189
+480 Print Chr$(108)&Chr$(109):Locate(R+1,Q)
+481 Print Chr$(108)&Chr$(109):G=G+1
+482 J(G)=S:H(G)=Q:I(G)=R:Goto 189
+483 Print Chr$(110)&Chr$(110):Locate(R+1,Q)
+484 Print Chr$(114)&Chr$(114):G=G+1
+485 J(G)=S:H(G)=Q:I(G)=R:Goto 189
+486 Print Chr$(112)&Chr$(113):Locate(R+1,Q)
+487 Print Chr$(116)&Chr$(117):Goto 189
+488 DATA 36,0,2,2,1,9,14,0,2,2,1,0,1,10,1,2
+489 DATA 1,9,1,6,8,0,1,9,1,2,1,9,1,2,1,8
+490 DATA 1,9,2,2,8,0,4,2,1,0,2,2,9,0,1,9
+491 DATA 1,2,1,9,1,2,1,0,1,2,2,9,13,0,1,9
+492 DATA 1,2,1,9,36,0
+493 DATA 20,0,1,1,6,0,1,1,5,0,1,2,1,9,1,2
+494 DATA 1,3,7,0,1,2,1,9,1,2,3,0,1,2,1,0
+495 DATA 1,1,1,0,1,2,1,9,1,2,1,9,1,0,1,1
+496 DATA 1,0,1,2,3,0,1,2,2,9,1,0,6,2,1,0
+497 DATA 3,2,1,0,1,2,1,9,1,8,6,2,2,9,3,2
+498 DATA 1,10,1,2,1,0,1,9,1,2,1,9,1,0,2,2
+499 DATA 1,9,2,2,1,9,1,0,3,2,3,0,1,2,3,0
+500 DATA 4,2,3,0,1,2,3,0,1,2,1,9,1,2,8,0
+501 DATA 1,2,1,6,1,2,17,0
+502 DATA 21,0,6,1,10,0,1,1,1,8,1,2,1,9,1,2
+503 DATA 1,1,6,0,6,1,2,2,6,1,2,0,1,1,1,10
+504 DATA 2,2,1,5,1,2,1,9,2,2,1,1,1,6,2,2,1
+505 DATA 1,2,0,1,1,2,2,1,4,1,1,3,2,1,9
+506 DATA 1,5,3,2,1,1,2,0,5,1,1,9,3,2,5,1,6
+507 DATA 0,1,1,3,2,1,4,1,1,10,0,6,1,21,0
+508 DATA 17,0,1,2,1,10,4,2,1,9,1,1,1,6,5,2,2
+509 DATA 0,1,2,1,0,4,2,1,11,2,1,1,8,2,2,1,3
+510 DATA 1,2,18,0,1,2,1,0,1,9,8,2,1,9,1,0,1
+511 DATA 2,2,0,1,2,1,0,1,9,1,2,1,3,3,2,1,0
+512 DATA 2,2,1,9,1,0,1,2,18,0,1,2,1,3,2,2,1
+513 DATA 0,1,2,1,1,1,2,1,3,3,2,1,0,1,2,2,0
+514 DATA 6,2,1,1,1,2,1,9,3,2,1,9,1,2,17,0
+515 DATA 2,0,1,1,8,0,1,1,5,0,1,4,1,3,9,0,1,2
+516 DATA 2,9,2,0,1,2,1,9,2,2,1,9,5,0,1,10,2
+517 DATA 2,1,9,2,0,1,9,3,2,1,9,5,0,1,9,1,2,1
+518 DATA 9,1,2,2,0,1,2,1,3,3,2,2,5,1,9,8,0,1
+519 DATA 5,6,0,1,5,1,0,1,9,3,2,1,6,2,0,1,2,1
+520 DATA 0,2,2,3,0,1,9,1,5,2,2,1,9,2,2,2,0,1
+521 DATA 2,1,9,1,2,1,9,5,0,2,2,2,9,1,2,2,0,1
+522 DATA 9,2,2,1,9,5,0,1,8,3,2,1,4,17,0
+523 DATA 19,0,1,1,2,0,1,6,1,2,2,9,8,0,1,1,1,3,3
+524 DATA 0,2,2,1,9,2,5,1,9,5,0,1,2,1,0,1,2,1,0
+525 DATA 2,2,1,4,1,9,2,0,1,5,5,0,1,2,1,3,1,2,2
+526 DATA 0,1,5,3,0,3,2,4,0,3,2,2,0,1,5,3,0,1,2
+527 DATA 1,3,1,2,5,0,1,5,2,0,2,9,1,2,1,10,1,0
+528 DATA 1,2,1,0,1,2,5,0,1,9,2,5,2,9,1,2,3,0,1
+529 DATA 3,1,1,8,0,1,2,1,4,1,2,1,8,2,0,1,1,19,0
+530 DATA 17,0,1,8,6,5,1,9,6,5,2,0,5,5,1,4,4,5,1
+531 DATA 9,1,5,1,9,1,5,2,0,1,9,1,5,1,9,2,5,1,9,1
+532 DATA 5,1,2,1,4,5,5,2,0,2,5,1,2,2,5,1,3,8,5,2
+533 DATA 0,2,5,1,9,4,5,1,9,6,5,2,0,5,5,1,9,2,5,1
+534 DATA 9,1,5,1,9,3,5,2,0,1,9,4,5,1,2,6,5,1,9,1
+535 DATA 5,2,0,5,5,1,10,7,5,1,6,17,0
+536 DATA 1,0,2,1,3,0,1,10,2,2,1,6,2,0,3,2,2,0,1,1
+537 DATA 1,3,3,0,1,5,1,2,1,0,1,3,3,0,1,2,1,9,7,0
+538 DATA 1,2,2,0,1,1,2,0,1,2,1,3,1,9,7,0,2,9,1,3
+539 DATA 1,2,1,0,2,2,4,0,1,2,1,3,1,2,2,0,3,2,1,3,2
+540 DATA 0,1,2,4,0,1,2,1,9,1,3,3,0,2,9,1,2,1,8,1,9
+541 DATA 1,2,1,0,1,1,2,0,1,2,1,5,1,2,2,0,1,2,1,3,2
+542 DATA 2,1,0,1,5,1,0,2,1,2,0,1,1,1,5,3,0,1,1,4,0
+543 DATA 1,5,5,0,1,1,4,0,1,3,1,9,3,5,1,9,5,0,2,1,3
+544 DATA 0,1,1,9,0
+545 DATA 17,0,1,8,8,2,2,9,2,2,1,9,2,0,1,2,12,5,1,2
+546 DATA 2,0,1,2,1,5,3,2,1,9,6,2,1,5,1,9,2,0,1,2,1
+547 DATA 5,1,2,8,5,1,2,1,5,1,2,2,0,1,2,1,5,1,2,8,5
+548 DATA 1,2,1,5,1,2,2,0,1,9,1,5,7,2,2,9,1,2,1,5,1
+549 DATA 9,2,0,1,2,12,5,1,2,2,0,1,9,4,2,1,9,1,2,1
+550 DATA 6,5,2,1,10,17,0
+551 DATA 3,0,1,9,8,5,1,1,6,0,1,5,5,0,6,1,2,0,6,1,2
+552 DATA 0,1,1,1,2,1,11,2,2,1,7,2,0,1,1,1,11,1,9,2
+553 DATA 2,4,1,4,13,1,1,2,0,1,1,1,2,1,9,2,2,1,12,2
+554 DATA 5,1,12,1,9,1,2,2,9,1,1,2,0,1,1,1,11,1,2,1
+555 DATA 8,1,9,1,12,2,5,1,12,3,2,1,9,1,1,2,0,1,1,4
+556 DATA 13,4,1,2,2,1,9,1,2,1,1,2,0,1,1,1,11,1,10
+557 DATA 2,2,1,1,2,0,6,1,2,0,6,1,5,0,1,5,6,0,1,6,8
+558 DATA 2,1,9,3,0
+559 DATA 37,0,1,6,2,2,1,9,1,2,1,9,10,0,1,2,1,9,2,14
+560 DATA 2,2,10,0,1,10,1,14,1,8,1,5,1,2,1,9,10,0,1
+561 DATA 2,2,14,1,9,2,2,10,0,1,2,1,9,4,2,53,0
+562 DATA 17,0,14,1,2,0,1,1,11,5,2,1,2,0,1,1,1,5,9,1
+563 DATA 1,9,1,5,1,1,2,0,1,1,10,5,1,11,1,5,1,1,2,0
+564 DATA 2,1,1,5,1,10,1,2,1,1,1,2,4,0,1,3,1,2,1,1,2
+565 DATA 0,1,1,1,8,1,1,1,6,2,5,1,9,1,1,3,5,1,9,1,5
+566 DATA 1,1,2,0,1,1,4,5,1,1,4,5,1,1,2,5,1,1,2,0,14
+567 DATA 1,17,0
+568 DATA 36,0,1,2,1,10,5,2,1,9,8,0,3,1,2,14,1,1,2
+569 DATA 2,8,0,1,2,1,14,4,2,1,14,1,11,8,0,1,11,1
+570 DATA 14,1,2,1,8,2,2,1,14,1,2,8,0,2,2,1,1,2,14
+571 DATA 3,1,8,0,6,2,1,6,1,2,36,0
+572 DATA 17,1,1,2,1,9,3,2,1,5,3,2,1,4,1,9,2,1,1,9
+573 DATA 2,1,2,13,6,1,2,2,1,14,1,12,1,10,1,2,2,1,2
+574 DATA 2,1,1,1,11,1,2,1,1,1,2,3,1,1,2,1,12,2,2,2
+575 DATA 1,2,2,1,1,1,7,1,1,1,11,1,2,1,5,1,8,1,1,1
+576 DATA 2,1,12,1,9,1,2,2,1,2,2,1,1,1,4,1,2,2,14
+577 DATA 1,5,1,6,1,1,1,2,1,12,2,2,2,1,2,2,1,1,1,9
+578 DATA 1,2,2,9,3,1,1,2,1,12,1,2,1,9,2,1,2,13,6
+579 DATA 1,1,2,2,14,1,12,2,2,2,1,1,2,1,9,2,2,1,1
+580 DATA 1,12,2,2,1,9,1,2,1,14,1,12,1,9,1,2,17,1
+581 DATA 16,0,1,6,3,5,1,1,2,2,1,10,1,2,1,9,2,2,2
+582 DATA 5,1,9,5,0,1,9,4,2,1,9,1,2,1,8,1,0,1,1,1
+583 DATA 5,2,0,1,9,3,5,1,9,2,2,1,9,2,2,1,9,1,0,1
+584 DATA 5,1,9,2,0,1,5,1,0,1,9,1,1,1,5,1,1,1,0,1
+585 DATA 5,1,0,1,1,2,5,1,9,3,0,1,5,1,0,1,2,1,0
+586 DATA 1,9,2,5,1,9,2,5,1,1,5,0,1,5,1,0,1,2,6,0
+587 DATA 1,5,6,0,1,9,1,5,1,9,5,0,1,1,1,5,7,0,1,1
+588 DATA 1,3,6,0,1,11,8,0,1,1,5,0,1,1,6,0
+589 DATA 17,0,2,9,1,2,2,0,4,1,2,0,1,9,1,2,1,9,2
+590 DATA 0,1,9,1,2,9,0,1,3,1,10,1,2,2,0,1,2,1,3
+591 DATA 1,9,1,0,1,2,1,9,3,2,1,9,1,0,1,2,1,0,1
+592 DATA 9,5,0,1,4,3,2,1,9,3,2,8,0,1,9,5,2,1,9
+593 DATA 1,6,5,0,1,2,1,0,1,9,1,0,1,2,1,9,1,2,1,9
+594 DATA 2,2,1,9,1,5,1,3,1,9,2,0,1,9,1,2,1,3,9,0
+595 DATA 1,9,1,2,2,0,2,9,1,2,2,0,4,1,2,0,1,4,1,9
+596 DATA 1,8,17,0
+597 Gosub 151:	Gosub 181:	Goto 197
