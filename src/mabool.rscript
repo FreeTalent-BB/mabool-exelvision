@@ -1,0 +1,57 @@
+;
+;  /$$      /$$  /$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$  /$$      
+; | $$$    /$$$ /$$__  $$| $$__  $$ /$$__  $$ /$$__  $$| $$      
+; | $$$$  /$$$$| $$  \ $$| $$  \ $$| $$  \ $$| $$  \ $$| $$      
+; | $$ $$/$$ $$| $$$$$$$$| $$$$$$$ | $$  | $$| $$  | $$| $$      
+; | $$  $$$| $$| $$__  $$| $$__  $$| $$  | $$| $$  | $$| $$      
+; | $$\  $ | $$| $$  | $$| $$  \ $$| $$  | $$| $$  | $$| $$      
+; | $$ \/  | $$| $$  | $$| $$$$$$$/|  $$$$$$/|  $$$$$$/| $$$$$$$$
+; |__/     |__/|__/  |__/|_______/  \______/  \______/ |________/
+;
+;                 Baptiste BIDEAUX (c)2022.
+;        https://github.com/FreeTalent-BB/mabool-exelvision
+
+; Convert PNG to user characters
+;#img2char "source":"./graphics/sprites.png","m":"exelvision","cl":"yes","o":"./inc/SPRITES.rscript"
+
+; Variable declaration for renaming
+;#var break$
+;#var key_action
+;#var for_var
+
+; Supprime la barre RADIAN
+;Call Poke(50432,162,5,45,162,137,45,10,162,5,45,162,200,45,10) : Call Exec(50432)
+CALL POKE(51192,162,5,45,162,136,45,10):CALL EXEC(51192)
+
+; Include files
+#INCLUDE inc.SPRITES
+#INCLUDE inc.VARS
+
+;For !FOR_VAR = 32 To 117
+;	CALL COLOR("1WBB") : PRINT CHR$(!FOR_VAR);
+;Next !FOR_VAR
+;end
+
+; Draw Title and rules
+Cls "WBB" : Gosub @draw_title : Gosub @draw_rules
+
+; Main loop
+#label root
+	; Wait a pressing on the fire button or space bar
+	Call Key1(!JOYID,!KEY_ACTION)
+	If !JOYID=32 And !KEY_ACTION=1 Then Goto @load_game
+	Goto @root
+
+#INCLUDE inc.TITLE
+
+; Load the game
+#label load_game
+	Cls : Locate( 10,15 ) : Call Color("0RBH") : Print"LOADING GAME"
+	Locate( 11,15 ) : Print"LOADING GAME": Goto @main_start
+
+#INCLUDE inc.MAP
+#INCLUDE inc.GAME
+#INCLUDE inc.MAPDATA
+
+#label main_start
+	Gosub @load_level :	Gosub @show_level :	Goto @play_game

@@ -1,0 +1,435 @@
+#label play_game
+	!NUM_BOMB = 0
+	
+#label game_loop
+
+	If !NUM_KEY = 0 And !NUM_STAR = 0 Then Gosub @open_door
+	!MOVES = 0 : Call Key1(!JOYID, !KEY_ACTION)
+	If !JOYID = 129 And !KEY_ACTION=1 And !PLAYER_X < 34 Then !MOVES=1:Goto @move_right
+	If !JOYID = 131 And !KEY_ACTION=1 And !PLAYER_X > 4 Then !MOVES=1:Goto @move_left
+	If !JOYID = 130 And !KEY_ACTION=1 And !PLAYER_Y < 20 Then !MOVES=1:Goto @move_down
+	If !JOYID = 128 And !KEY_ACTION=1 And !PLAYER_Y > 2 Then !MOVES=1:Goto @move_up
+	if !JOYID = 32 And !KEY_ACTION=1 And !NUM_BOMB > 0 Then Goto @bomb 
+	if Key(0)=115 Then Goto @perd_vie
+	Goto @game_loop
+
+#label move_right
+	Call Color( "1WB") : Locate(!PLAYER_Y, !PLAYER_X )
+	If !MAP( !ADR_PLAYER + 1) = !C_BOX And !MOVES=1 Then Goto @box_right
+	If !MAP( !ADR_PLAYER + 1) = !C_SWITCH_ON And !MOVES=1 Then !MAP( !ADR_PLAYER + 1) = !C_SWITCH_OFF : Gosub @1move_right:Gosub @disable_laser : Goto @game_loop
+	If !MAP( !ADR_PLAYER + 1 ) = !C_WALL Or !MAP( !ADR_PLAYER + 1 ) = !C_DOOR_CLOSED Or !MAP( !ADR_PLAYER + 1 ) = !C_SWITCH_ON Then Goto @game_loop
+	If !MAP( !ADR_PLAYER + 1 ) = !C_SWITCH_OFF Or !MAP( !ADR_PLAYER + 1 ) = !C_BOX Then Goto @game_loop
+	!MOVES=0:Gosub @restore_tile
+	
+	!ADR_PLAYER = !ADR_PLAYER + 1 : !PLAYER_X = !PLAYER_X + 2 : Locate(!PLAYER_Y,!PLAYER_X)
+	Gosub @update_tile:	Goto @move_right
+
+#label 1move_right
+	Locate(!PLAYER_Y, !PLAYER_X+2) :Print Chr$( 43 )&Chr$( 47 )
+	Locate(!PLAYER_Y+1, !PLAYER_X+2):print Chr$( 84 )&Chr$( 85 )
+	Return
+
+#label move_left
+	Call Color( "1WB") : Locate(!PLAYER_Y, !PLAYER_X )	
+	If !MAP( !ADR_PLAYER - 1) = !C_BOX And !MOVES=1 Then Goto @box_left
+	If !MAP( !ADR_PLAYER - 1) = !C_SWITCH_ON  And !MOVES=1 Then !MAP( !ADR_PLAYER - 1) = !C_SWITCH_OFF : Gosub @1move_left:Gosub @disable_laser : Goto @game_loop
+	If !MAP( !ADR_PLAYER - 1 ) = !C_WALL Or !MAP( !ADR_PLAYER - 1 ) = !C_DOOR_CLOSED Or !MAP( !ADR_PLAYER - 1 ) = !C_SWITCH_ON Then Goto @game_loop
+	If !MAP( !ADR_PLAYER - 1 ) = !C_SWITCH_OFF Or !MAP( !ADR_PLAYER - 1 ) = !C_BOX Then Goto @game_loop
+	!MOVES=0:Gosub @restore_tile
+	
+	!ADR_PLAYER = !ADR_PLAYER - 1 : !PLAYER_X = !PLAYER_X - 2 : Locate(!PLAYER_Y, !PLAYER_X )
+	Gosub @update_tile:	Goto @move_left
+
+#label 1move_left
+	Locate(!PLAYER_Y,!PLAYER_X-2):Print Chr$( 43 )&Chr$( 47 )
+	Locate(!PLAYER_Y+1,!PLAYER_X-2):Print Chr$( 84 )&Chr$( 85 )
+	Return
+
+#label move_up
+	Call Color( "1WB") : Locate(!PLAYER_Y, !PLAYER_X )	
+	If !MAP( !ADR_PLAYER - 16) = !C_BOX And !MOVES=1 Then Goto @box_up
+	If !MAP( !ADR_PLAYER - 16) = !C_SWITCH_ON And !MOVES=1  Then !MAP( !ADR_PLAYER - 16) = !C_SWITCH_OFF : Gosub @1move_up:Gosub @disable_laser : Goto @game_loop
+	If !MAP( !ADR_PLAYER - 16 ) = !C_WALL Or !MAP( !ADR_PLAYER - 16 ) = !C_DOOR_CLOSED  Or !MAP( !ADR_PLAYER - 16 ) = !C_SWITCH_ON Then Goto @game_loop 
+	If !MAP( !ADR_PLAYER -16 ) = !C_SWITCH_OFF Or !MAP( !ADR_PLAYER - 16 ) = !C_BOX Then Goto @game_loop
+	!MOVES=0:Gosub @restore_tile
+	
+	!ADR_PLAYER = !ADR_PLAYER - 16 : !PLAYER_Y = !PLAYER_Y - 2 : Locate(!PLAYER_Y, !PLAYER_X )
+	Gosub @update_tile:	Goto @move_up
+
+#label 1move_up
+	Locate(!PLAYER_Y-2,!PLAYER_X):Print Chr$( 43 )&Chr$( 47 )
+	Locate(!PLAYER_Y-1,!PLAYER_X):Print Chr$( 84 )&Chr$( 85 )
+	Return
+
+#label move_down
+	Call Color( "1WB") : Locate(!PLAYER_Y, !PLAYER_X )
+	If !MAP( !ADR_PLAYER + 16) = !C_BOX And !MOVES=1 Then Goto @box_down
+	If !MAP( !ADR_PLAYER + 16) = !C_SWITCH_ON And !MOVES=1 Then !MAP( !ADR_PLAYER + 16) = !C_SWITCH_OFF : Gosub @1move_down:Gosub @disable_laser : Goto @game_loop
+	If !MAP( !ADR_PLAYER + 16 ) = !C_WALL Or !MAP( !ADR_PLAYER + 16 ) = !C_DOOR_CLOSED Or !MAP( !ADR_PLAYER + 16 ) = !C_SWITCH_ON Then Goto @game_loop
+	If !MAP( !ADR_PLAYER + 16 ) = !C_SWITCH_OFF Or !MAP( !ADR_PLAYER + 16 ) = !C_BOX Then Goto @game_loop
+	!MOVES=0:Gosub @restore_tile
+	
+	!ADR_PLAYER = !ADR_PLAYER + 16 : !PLAYER_Y = !PLAYER_Y + 2 : Locate(!PLAYER_Y, !PLAYER_X )
+	Gosub @update_tile:	Goto @move_down
+
+#label 1move_down
+	Locate(!PLAYER_Y+2,!PLAYER_X) :Print Chr$( 43 )&Chr$( 47 )
+	Locate(!PLAYER_Y+3,!PLAYER_X):Print Chr$( 84 )&Chr$( 85 )
+	Return
+
+#label restore_tile
+	!TILE_VALUE = !MAP( !ADR_PLAYER ) : Locate(!PLAYER_Y, !PLAYER_X )
+	If !TILE_VALUE = 0 Then Print Chr$( 111 )&Chr$( 111 ):Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 111 )&Chr$( 111 )
+	If !TILE_VALUE = !C_GROUND Or !TILE_VALUE = !C_MABOOL_GROUND Then Gosub @1restore_tile
+	If !TILE_VALUE = !C_ELEVATOR Then Print Chr$( 35 )&Chr$( 36 ):Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 72 )&Chr$( 73 )
+	If !TILE_VALUE = !C_TELEPORTER Then Print Chr$( 37 )&Chr$( 38 ):Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 74 )&Chr$( 75 )
+	If !TILE_VALUE = !C_BROKEN Then sub @2restore_tile
+
+	Return
+
+#label 1restore_tile
+	Print Chr$( 34 )&Chr$( 34 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 34 )&Chr$( 34 )
+	Return
+
+#label 2restore_tile
+	Print Chr$( 111 )&Chr$( 111 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 111 )&Chr$( 111 ) : !MAP( !ADR_PLAYER ) = 0
+	Return
+
+#label update_tile
+	!TILE_VALUE = !MAP( !ADR_PLAYER ):Locate(!PLAYER_Y, !PLAYER_X )
+
+	If !TILE_VALUE = 0 Then Gosub @1update_tile: Goto @perd_vie
+	If !TILE_VALUE = !C_GROUND Then Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 88 )&Chr$( 89 )
+	If !TILE_VALUE = !C_ELEVATOR Then Gosub @2update_tile : Goto @elevator
+	If !TILE_VALUE = !C_TELEPORTER Then Gosub @3update_tile : Goto @teleport
+	If !TILE_VALUE = !C_BROKEN Then Print Chr$( 56 )&Chr$( 57 ):Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 94 )&Chr$( 95 )
+	If !TILE_VALUE = !C_STAR_GROUND Then Gosub @4update_tile : Gosub @take_star : Goto @game_loop
+	If !TILE_VALUE = !C_KEY_GROUND Then Gosub @5update_tile : Gosub @take_key : Goto @game_loop
+	If !TILE_VALUE = !C_BOMB_GROUND Then Gosub @6update_tile : !NUM_BOMB = !NUM_BOMB + 1 : Goto @game_loop
+	If !TILE_VALUE = !C_DOOR_OPENED Then Gosub @7update_tile : Goto @fin_niveau
+	If !TILE_VALUE = !C_LASERH Or !TILE_VALUE=!C_LASERV Then Gosub @8update_tile : Goto @perd_vie
+
+	Return
+
+#label 1update_tile
+	Print Chr$( 48 )&Chr$( 49 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	print Chr$( 86 )&Chr$( 87 ) : Return
+
+#label 2update_tile
+	Print Chr$( 52 )&Chr$( 53 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 90 )&Chr$( 91 ):Return
+
+#label 3update_tile
+	Print Chr$( 54 )&Chr$( 55 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 92 )&Chr$( 93 ) : Return
+
+#label 4update_tile
+	Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 88 )&Chr$( 89 ) : !MAP( !ADR_PLAYER ) = !C_GROUND
+	Return
+
+#label 5update_tile
+	Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 88 )&Chr$( 89 )
+	!MAP( !ADR_PLAYER ) = !C_GROUND :Return
+
+#label 6update_tile
+	Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	print Chr$( 88 )&Chr$( 89 ) : !MAP( !ADR_PLAYER ) = !C_GROUND
+	Return
+
+#label 7update_tile
+	Print Chr$( 54 )&Chr$( 55 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 92 )&Chr$( 93 ):return
+
+#label 8update_tile
+	Print Chr$( 48 )&Chr$( 49 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 86 )&Chr$( 87 ):Return
+
+#label take_star
+	!SCORE=!SCORE+10 : Gosub @update_infos : !NUM_STAR = !NUM_STAR - 1:	Return
+
+#label take_key
+	!SCORE=!SCORE+10 : Gosub @update_infos : !NUM_KEY = !NUM_KEY - 1:Return
+
+#label open_door
+	Call Color("1WB") : !MAP( !ADR_DOOR ) = !C_DOOR_OPENED : Locate(!DOOR_Y,!DOOR_X)
+	Print Chr$( 43 )&Chr$( 44 ):Locate(!DOOR_Y+1,!DOOR_X): print Chr$( 80 )&Chr$( 81 )
+	!NUM_KEY=-1 : !NUM_STAR=-1 : Return
+	
+#label teleport
+	!TELEPORT_VALUE=1
+	Locate(!PLAYER_Y, !PLAYER_X ) : Print Chr$( 37 )&Chr$( 38 ):Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 74 )&Chr$( 75 )
+	If !PLAYER_X = !TELEPORT( 1 ) And !PLAYER_Y = !TELEPORT( 2 ) Then !TELEPORT_VALUE = 4
+	!PLAYER_X = !TELEPORT( !TELEPORT_VALUE ) : !PLAYER_Y = !TELEPORT( !TELEPORT_VALUE + 1 ) : !ADR_PLAYER = !TELEPORT( !TELEPORT_VALUE + 2 )/
+	Locate(!PLAYER_Y, !PLAYER_X ) : Gosub @1teleport:goto @game_loop		
+
+#label 1teleport
+	Print Chr$( 54 )&Chr$( 55 ):Locate(!PLAYER_Y+1, !PLAYER_X )
+	Print Chr$( 92 )&Chr$( 93 ):Return
+
+#label elevator
+	Gosub @update_elevator
+	If !MAP(!ADR_PLAYER - 1) = 0 Then Goto @left_elevator
+	If !MAP(!ADR_PLAYER + 1) = 0 Then Goto @right_elevator
+	If !MAP(!ADR_PLAYER - 16) = 0 Then Goto @up_elevator
+	If !MAP(!ADR_PLAYER + 16) = 0 Then Goto @down_elevator
+
+#label left_elevator
+	If !MAP( !ADR_PLAYER - 1 ) <> 0 Or !PLAYER_X = 4 Then Goto @game_loop
+	!PLAYER_X = !PLAYER_X - 2 : !ADR_PLAYER = !ADR_PLAYER - 1
+	Gosub @update_elevator
+	!MAP( !ADR_PLAYER + 1 ) = 0	: Locate(!PLAYER_Y, !PLAYER_X+2 )
+	Print Chr$( 111 )&Chr$( 111 ):Locate(!PLAYER_Y+1, !PLAYER_X+2 ):Print Chr$( 111 )&Chr$( 111 )	
+	Goto @left_elevator
+	
+#label right_elevator
+	If !MAP( !ADR_PLAYER + 1 ) <> 0 Or !PLAYER_X = 34 Then Goto @game_loop
+	!PLAYER_X = !PLAYER_X + 2 : !ADR_PLAYER = !ADR_PLAYER + 1
+	Gosub @update_elevator
+	!MAP( !ADR_PLAYER - 1 ) = 0: Locate(!PLAYER_Y, !PLAYER_X-2 )
+	Print Chr$( 111 )&Chr$( 111 ):Locate(!PLAYER_Y+1, !PLAYER_X-2 ):Print Chr$( 111 )&Chr$( 111 )
+	Goto @right_elevator
+	
+#label up_elevator
+	If !MAP( !ADR_PLAYER - 16 ) <> 0 Or !PLAYER_Y = 2 Then Goto @game_loop
+	!PLAYER_Y = !PLAYER_Y - 2 : !ADR_PLAYER = !ADR_PLAYER - 16
+	Gosub @update_elevator
+	!MAP( !ADR_PLAYER + 16 ) = 0: Locate(!PLAYER_Y+2, !PLAYER_X )
+	Print Chr$( 111 )&Chr$( 111 ):Locate(!PLAYER_Y+3, !PLAYER_X ):Print Chr$( 111 )&Chr$( 111 )	
+	Goto @up_elevator
+
+#label down_elevator
+	If !MAP( !ADR_PLAYER + 16 ) <> 0 Or !PLAYER_Y = 20 Then Goto @game_loop
+	!PLAYER_Y = !PLAYER_Y + 2 : !ADR_PLAYER = !ADR_PLAYER + 16
+	Gosub @update_elevator
+	!MAP( !ADR_PLAYER - 16 ) = 0: Locate(!PLAYER_Y-2, !PLAYER_X )
+	Print Chr$( 111 )&Chr$( 111 ):Locate(!PLAYER_Y-1, !PLAYER_X ):Print Chr$( 111 )&Chr$( 111 )	
+	Goto @down_elevator
+
+#label update_elevator
+	Locate(!PLAYER_Y, !PLAYER_X ) : Print Chr$( 52 )&Chr$( 53 )
+	Locate(!PLAYER_Y+1, !PLAYER_X ):Print Chr$( 90 )&Chr$( 91 )
+	!MAP( !ADR_PLAYER ) = !C_ELEVATOR:Return
+
+#label bomb
+	!NUM_BOMB = !NUM_BOMB - 1 : Call Color("1WB") 
+	If !PLAYER_Y > 2 Then Gosub @up_boom
+	If !PLAYER_Y < 20 Then Gosub @down_boom
+	If !PLAYER_X > 4 Then Gosub @left_boom
+	If !PLAYER_X < 34 Then Gosub @right_boom
+	goto @game_loop
+
+#label up_boom
+	If !MAP( !ADR_PLAYER-16 ) = !C_WALL Then !MAP( !ADR_PLAYER-16 ) = !C_GROUND : Gosub @1up_boom
+	Return
+
+#label 1up_boom
+	Locate(!PLAYER_Y-2, !PLAYER_X ) : Print Chr$( 34 )&Chr$( 34 )
+	Locate(!PLAYER_Y-1, !PLAYER_X ):Print Chr$( 34 )&Chr$( 34 )
+	Return
+
+#label down_boom
+	If !MAP( !ADR_PLAYER+16 ) = !C_WALL Then !MAP( !ADR_PLAYER+16 ) = !C_GROUND :Gosub @1down_boom
+	Return
+
+#label 1down_boom
+  Locate(!PLAYER_Y+2, !PLAYER_X ) : Print Chr$( 34 )&Chr$( 34 )
+  Locate(!PLAYER_Y+3, !PLAYER_X ):Print Chr$( 34 )&Chr$( 34 )
+  Return	
+
+#label left_boom
+	If !MAP( !ADR_PLAYER-1 ) = !C_WALL Then !MAP( !ADR_PLAYER-1 ) = !C_GROUND : Gosub @1left_boom
+	Return
+
+#label 1left_boom
+	Locate(!PLAYER_Y, !PLAYER_X-2 ) : Print Chr$( 34 )&Chr$( 34 )
+	Locate(!PLAYER_Y+1, !PLAYER_X-2 ):Print Chr$( 34 )&Chr$( 34 )
+	Return
+
+#label right_boom
+	If !MAP( !ADR_PLAYER+1 ) = !C_WALL Then !MAP( !ADR_PLAYER+1 ) = !C_GROUND :Gosub @1right_boom
+	Return
+
+#label 1right_boom
+	Locate(!PLAYER_Y, !PLAYER_X+2 ) : Print Chr$( 34 )&Chr$( 34 )
+	Locate(!PLAYER_Y+1, !PLAYER_X+2 ):Print Chr$( 34 )&Chr$( 34 )
+	Return
+
+#label box_up
+	If !PLAYER_Y=2 Or ( !MAP( !ADR_PLAYER - 32 )<> !C_GROUND And !MAP( !ADR_PLAYER - 32 )<> !C_MABOOL_GROUND ) Then Goto @game_loop
+	!MAP( !ADR_PLAYER - 16 ) = !C_GROUND : !MAP( !ADR_PLAYER - 32 ) = !C_BOX
+	Gosub @restore_tile
+	Locate(!PLAYER_Y-2, !PLAYER_X ) : Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y-1, !PLAYER_X ):Print Chr$( 88 )&Chr$( 89 )
+	Locate(!PLAYER_Y-4, !PLAYER_X ) : Print Chr$( 112 )&Chr$( 113 )
+	Locate(!PLAYER_Y-3, !PLAYER_X ):Print Chr$( 116 )&Chr$( 117 )
+	!PLAYER_Y = !PLAYER_Y - 2 : Locate(!PLAYER_Y, !PLAYER_X ): !ADR_PLAYER = !ADR_PLAYER - 16 : Gosub @update_tile
+	Goto @game_loop
+
+#label box_down
+	If !PLAYER_Y=20 Or ( !MAP( !ADR_PLAYER + 32 )<> !C_GROUND And !MAP( !ADR_PLAYER + 32 )<> !C_MABOOL_GROUND ) Then Goto @game_loop
+	!MAP( !ADR_PLAYER + 16 ) = !C_GROUND : !MAP( !ADR_PLAYER + 32 ) = !C_BOX/
+	Gosub @restore_tile
+	Locate(!PLAYER_Y+2, !PLAYER_X ) : Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+3, !PLAYER_X ):Print Chr$( 88 )&Chr$( 89 )
+	Locate(!PLAYER_Y+4, !PLAYER_X ) : Print Chr$( 112 )&Chr$( 113 )
+	Locate(!PLAYER_Y+5, !PLAYER_X ):Print Chr$( 116 )&Chr$( 117 )
+	!PLAYER_Y = !PLAYER_Y + 2 : Locate(!PLAYER_Y, !PLAYER_X ) : !ADR_PLAYER = !ADR_PLAYER + 16 : Gosub @update_tile
+	Goto @game_loop
+
+#label box_left
+	If !PLAYER_X=4 Or ( !MAP( !ADR_PLAYER - 2 )<> !C_GROUND And !MAP( !ADR_PLAYER - 2 )<> !C_MABOOL_GROUND ) Then Goto @game_loop
+	!MAP( !ADR_PLAYER - 1 ) = !C_GROUND : !MAP( !ADR_PLAYER - 2 ) = !C_BOX
+	Gosub @restore_tile
+	Locate(!PLAYER_Y, !PLAYER_X-2 ) : Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+1, !PLAYER_X-2 ):Print Chr$( 88 )&Chr$( 89 )
+	Locate(!PLAYER_Y, !PLAYER_X-4 ) : Print Chr$( 112 )&Chr$( 113 )
+	Locate(!PLAYER_Y+1, !PLAYER_X-4 ):Print Chr$( 116 )&Chr$( 117 )
+	!PLAYER_X = !PLAYER_X - 2 : Locate(!PLAYER_Y, !PLAYER_X ) : !ADR_PLAYER = !ADR_PLAYER - 1 : Gosub @update_tile
+	Goto @game_loop
+
+#label box_right
+	If !PLAYER_X=32 Or ( !MAP( !ADR_PLAYER + 2 )<> !C_GROUND And !MAP( !ADR_PLAYER + 2 )<> !C_MABOOL_GROUND ) Then Goto @game_loop
+	!MAP( !ADR_PLAYER + 1 ) = !C_GROUND:!MAP( !ADR_PLAYER + 2 ) = !C_BOX/
+	Gosub @restore_tile
+	Locate(!PLAYER_Y, !PLAYER_X+2 ) : Print Chr$( 50 )&Chr$( 51 ):Locate(!PLAYER_Y+1, !PLAYER_X+2 ):Print Chr$( 88 )&Chr$( 89 )
+	Locate(!PLAYER_Y, !PLAYER_X+4 ) : Print Chr$( 112 )&Chr$( 113 )
+	Locate(!PLAYER_Y+1, !PLAYER_X+4 ):Print Chr$( 116 )&Chr$( 117 )
+	!PLAYER_X = !PLAYER_X + 2 : Locate(!PLAYER_Y, !PLAYER_X ) : !ADR_PLAYER = !ADR_PLAYER + 1 : Gosub @update_tile
+	Goto @game_loop
+	
+#label update_infos
+	Call Color("0WB"):Locate(22, 5 )
+	!TXT1$ = Seg$( Str$( !SCORE ), 2, Len( Str$( !SCORE ) ) - 1 )
+	If Len( !TXT1$ ) < 6 Then For !FOR_VAR = Len( !TXT1$ ) To 6 : !TXT1$ = "0"&!TXT1$ : Next !FOR_VAR
+	Print "SCORE "&!TXT1$;
+	!TXT1$ = Seg$( Str$( !LEVEL ), 2, Len( Str$( !LEVEL ) ) - 1 )
+	If Len( !TXT1$ ) < 2 Then !TXT1$ = "0"&!TXT1$
+	Print " STAGE "&!TXT1$;
+	!TXT1$ = Seg$( Str$( !LIVES ), 2, Len( Str$( !LIVES ) ) - 1 )
+	If Len( !TXT1$ ) < 2 Then !TXT1$ = "0"&!TXT1$ 
+	Print " LIVES "&!TXT1$;
+	!TXT1$=""
+	Return
+
+#label disable_laser
+	For !FOR_VAR = 1 To !NUM_LASER
+		!MAP( !LASER( !FOR_VAR ) ) = !C_GROUND
+		Call Color( "1WB"):Locate(!LASER_Y( !FOR_VAR ), !LASER_X( !FOR_VAR ) ) 
+		Print Chr$( 34 )&Chr$( 34 ):Locate(!LASER_Y( !FOR_VAR )+1, !LASER_X( !FOR_VAR ) )
+		Print Chr$( 34 )&Chr$( 34 )
+	Next !FOR_VAR
+	Return
+
+#label perd_vie
+	Call Color( "0WB") : Locate(22,1) : Print RPT$(" ", 39);
+	Locate(22,13):Print "HAAAAAaaaaa...";
+	!LIVES = !LIVES - 1
+	For !FOR_VAR = 1 To 10 : Next !FOR_VAR
+	If !LIVES = 0 Then Goto @game_over 
+	goto @main_start
+
+#label gagne_vie
+	Call Color( "0WB") : Locate(22,1) : Print RPT$(" ", 39);
+	Locate(22,15) : Print "EXTRA LIFE!";
+	!NEW_LIFE = 0 :	!LIVES = !LIVES + 1
+	For !FOR_VAR = 1 To 10 : Next !FOR_VAR
+	goto @main_start
+
+#label fin_niveau
+	Call Color( "0WB") : Locate(22,1) : Print RPT$(" ", 39);
+	Locate(22,15) : Print "NICE JOB!"
+	!LEVEL_COLOR=!LEVEL_COLOR+1 : If !LEVEL_COLOR=4 Then !LEVEL_COLOR=5
+	If !LEVEL_COLOR>7 Then !LEVEL_COLOR=1
+	For !FOR_VAR = 1 To 10 : Next !FOR_VAR
+	!LEVEL = !LEVEL + 1 : If !LEVEL>!C_MAX_LEVELS Then Goto @congratulations
+	!NEW_LIFE = !NEW_LIFE + 1 : If !NEW_LIFE = 5 Then goto @gagne_vie
+	goto @main_start
+	
+
+#label game_over
+	Cls : Locate( 9,18 ) : Call Color("0RBH") : Print"GAME"
+	Locate( 10,18 ) : Call Color("0RBH") : Print"GAME"
+	Locate( 11,18 ) : Call Color("0RBH") : Print"OVER"
+	Locate( 12,18 ) : Call Color("0RBH") : Print"OVER"
+	Call Color( "0WBH") : Locate( 17,5): Print "FINAL SCORE:"&Str$(!SCORE)
+	Locate( 18,5):Print "FINAL SCORE:"&Str$(!SCORE)
+	For !FOR_VAR=1 To 10:Next !FOR_VAR
+	!LEVEL=1:!LEVEL_COLOR=1:!LIVES=4:!SCORE=0
+	Goto @main_start
+	
+#label congratulations
+	Cls : Locate( 9,13 ) : Call Color("0GBH") : Print"CONGRATULATIONS!"
+	Locate( 10,13 ) : Call Color("0GBH") : Print"CONGRATULATIONS!"
+	Locate( 11,5 ) : Call Color("0YBH") : Print"THANK YOU FOR PLAYING MABOOL!"
+	Locate( 12,5 ) : Call Color("0YBH") : Print"THANK YOU FOR PLAYING MABOOL!"
+	Call Color( "0WBH") : Locate( 17,5): Print "FINAL SCORE:"&Str$(!SCORE)
+	Locate( 18,5):Print "FINAL SCORE:"&Str$(!SCORE)
+	For !FOR_VAR=1 To 5000:Next !FOR_VAR
+	!LEVEL=1:!LEVEL_COLOR=1:!LIVES=4:!SCORE=0
+	Goto @main_start
+	
+;1
+#label tile_wall
+	Print Chr$( 118 )&Chr$( 33 ) : Locate(!MAP_Y+1,!MAP_X) 
+	Print Chr$( 70 )&Chr$( 71 ) : Goto @next_tile
+;2
+#label tile_ground
+	Print Chr$( 34 )&Chr$( 34 ) :Locate(!MAP_Y+1,!MAP_X) 
+	Print Chr$( 34 )&Chr$( 34 ):Goto @next_tile
+;3
+#label tile_elevator
+	Print Chr$( 35 )&Chr$( 36 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 72 )&Chr$( 73 ) : Goto @next_tile
+;4
+#label tile_teleporter
+	Print Chr$( 37 )&Chr$( 38 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 74 )&Chr$( 75 )
+	!TELEPORT( !NUM_TELEPORTER ) = !MAP_X : !TELEPORT( !NUM_TELEPORTER + 1 ) = !MAP_Y
+	!TELEPORT( !NUM_TELEPORTER + 2 ) = !MAP_POS : !NUM_TELEPORTER = !NUM_TELEPORTER + 3
+	Goto @next_tile
+;5 
+#label tile_broken
+	Print Chr$( 39 )&Chr$( 40 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 76 )&Chr$( 77 ) : Goto @next_tile
+;6	
+#label tile_door_closed
+	Print Chr$( 41 )&Chr$( 42 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 78 )&Chr$( 79 )
+	!DOOR_X = !MAP_X : !DOOR_Y = !MAP_Y : !ADR_DOOR = !MAP_POS : Goto @next_tile
+;7
+#label tile_switch_on
+	Print Chr$( 45 )&Chr$( 46 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 82 )&Chr$( 83 ) : Goto @next_tile
+;8
+#label tile_mabool_ground
+	Print Chr$( 50 )&Chr$( 51 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 88 )&Chr$( 89 ) 
+	!PLAYER_X = !MAP_X : !PLAYER_Y = !MAP_Y : !ADR_PLAYER = !MAP_POS : !MAP(!ADR_PLAYER) = 2:Goto @next_tile
+;9 
+#label tile_star_ground
+	Print Chr$( 60 )&Chr$( 61 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 98 )&Chr$( 99 ) : !NUM_STAR = !NUM_STAR + 1 : Goto @next_tile
+;10
+#label tile_key_ground
+	Print Chr$( 64 )&Chr$( 65 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 102 )&Chr$( 103 ) : !NUM_KEY = !NUM_KEY + 1 : Goto @next_tile
+;11
+#label tile_bomb_ground
+	Print Chr$( 68 )&Chr$( 69 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 106 )&Chr$( 107 ) : Goto @next_tile
+;12
+#label tile_laserh
+	Print Chr$( 108 )&Chr$( 109 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 108 )&Chr$( 109 ) : !NUM_LASER = !NUM_LASER + 1
+	!LASER(!NUM_LASER)=!MAP_POS : !LASER_X(!NUM_LASER)=!MAP_X:!LASER_Y(!NUM_LASER)=!MAP_Y:Goto @next_tile
+;13 
+#label tile_laserv
+	Print Chr$( 110 )&Chr$( 110 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 114 )&Chr$( 114 ) : !NUM_LASER = !NUM_LASER + 1
+	!LASER(!NUM_LASER)=!MAP_POS : !LASER_X(!NUM_LASER)=!MAP_X:!LASER_Y(!NUM_LASER)=!MAP_Y:Goto @next_tile
+;14	
+#label tile_box
+	Print Chr$( 112 )&Chr$( 113 ):Locate(!MAP_Y+1,!MAP_X)
+	Print Chr$( 116 )&Chr$( 117 ) : Goto @next_tile
+	
