@@ -1,4 +1,4 @@
-# Mabool for VG5000µ
+# Mabool for EXL100 & EXELTEL
 
 Here you can find all the graphic resources useful for the development of the game.
 
