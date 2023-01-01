@@ -1,4 +1,4 @@
-# Mabool for VG5000µ
+# Mabool for EXL100 & EXELTEL
 
 The RSCRIPT sources needed to build the final program. They are included by the <b>main.rscript</b> file which is at the root of the "src" folder.
 
