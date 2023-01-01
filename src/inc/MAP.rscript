@@ -2,6 +2,9 @@
 ; Load the current level
 ;
 #label load_level
+	If !LEVEL_COLOR>7 Then !LEVEL_COLOR=1
+	!LCOL$ = SEG$("RGMCBYW",!LEVEL_COLOR, 1 )
+
 	If !LEVEL = 1 Then Restore @map1$
 	If !LEVEL = 2 Then Restore @map2$
 	If !LEVEL = 3 Then Restore @map3$
@@ -33,10 +36,6 @@
 	Goto @read_data1
 
 #label stop_read
-;	For !FOR_VAR = 1 To 160
-;		Print Str$( !MAP( !FOR_VAR ) );
-;	Next !FOR_VAR
-;	End
 	Return
 
 ;
@@ -50,7 +49,7 @@
 		
 #label draw_line2
 
-	Call Color("1WB") : Locate(!MAP_Y,!MAP_X)
+	Call Color("1"&!LCOL$&"B") : Locate(!MAP_Y,!MAP_X)
 	!TILE_VALUE = !MAP( !MAP_POS )
 	If !TILE_VALUE = 0 Then Goto @next_tile
 	On !TILE_VALUE Goto @tile_wall, @tile_ground, @tile_elevator, @tile_teleporter, @tile_broken, @tile_door_closed,@tile_switch_on,@tile_mabool_ground,@tile_star_ground,@tile_key_ground,@tile_bomb_ground, @tile_laserh, @tile_laserv, @tile_box

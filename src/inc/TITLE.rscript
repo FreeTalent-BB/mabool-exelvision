@@ -9,8 +9,8 @@
 		!TITLE_X = !TITLE_X + 1:If !TITLE_X = 41 Then !TITLE_X=1:!TITLE_Y=!TITLE_Y+1
 	Next !FOR_VAR
 
-	CALL COLOR( "0GB") : Locate(9,14) : Print "PRESS SPACEBAR";
-	Locate(22,9): Print "BAPTISTE BIDEAUX (c)2022.";
+	CALL COLOR( "0WB") : Locate(9,14) : Print "PRESS FIRE";
+	CALL COLOR( "0YB"):Locate(22,9): Print "BAPTISTE BIDEAUX (c)2022.";
 	Return
 
 #label draw_rules
