@@ -1,4 +1,4 @@
-# Mabool for VG5000µ
+# Mabool for EXL100 & EXELTEL
 
 Miscellaneous Documents:
 
