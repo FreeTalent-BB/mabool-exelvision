@@ -1,1 +1,1 @@
-# mabool-vg5000
+# Mabool for EXL100 & EXELTEL

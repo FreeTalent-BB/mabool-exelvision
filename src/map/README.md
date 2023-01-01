@@ -1,4 +1,4 @@
-# Mabool for VG5000µ
+# Mabool for EXL100 & EXELTEL
 
 Map files used by the Map editor "TILED" that you can find here : https://www.mapeditor.org/
 
