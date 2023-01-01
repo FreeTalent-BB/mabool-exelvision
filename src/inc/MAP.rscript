@@ -24,12 +24,16 @@
 	
 	Cls: !MAP_POS = 1 : !NUM_LASER = 0
 #label read_data1
+	Call Color("0WB") : Locate(1,1): Print Str$(!MAP_POS);
 	If !MAP_POS > 160 Then Goto @stop_read
 	
 #label read_data2
 	Read !NUM_TILES,!TILE_VALUE
+	Call Color("0WB") : Locate(2,1): Print Str$(!NUM_TILES)&", "&Str$(!TILE_VALUE);
+
 	For !FOR_VAR = 0 To !NUM_TILES - 1 : !MAP( !MAP_POS + !FOR_VAR ) = !TILE_VALUE : Next !FOR_VAR
 	!MAP_POS = !MAP_POS + !NUM_TILES
+	Call Color("0WB") : Locate(1,1): Print Str$(!MAP_POS);
 
 	If !MAP_POS > 160 Then Goto @stop_read
 	Goto @read_data2
