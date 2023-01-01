@@ -24,7 +24,8 @@
 	
 	Cls: !MAP_POS = 1 : !NUM_LASER = 0
 #label read_data1
-	Call Color("0WB") : Locate(1,1): Print Str$(!MAP_POS);
+	Call Color("0WB")
+	If !LEVEL=4 Then Locate(1,1): Print Str$(!MAP_POS);:Gosub @wait_key
 	If !MAP_POS > 160 Then Goto @stop_read
 	
 #label read_data2
@@ -69,3 +70,9 @@
 	Gosub @update_infos
 	!TXT1$ = ""
 	Return
+
+#label wait_key
+
+#label 1wait_key
+	Call Key1(!JOYID, !KEY_ACTION)
+	If !JOYID=32 And !KEY_ACTION=1 Then Return Else Goto @1wait_key
