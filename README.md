@@ -2,10 +2,10 @@
 <table style="position:relative; width:50vw; margin-left:auto; margin-right: auto;border: none;">
 <tr>
 <td width="50%">
-<img src="https://user-images.githubusercontent.com/11832290/182314763-c4653211-7cd7-4c99-879a-bcfeecc2ad2b.png" style="position:relative;width:25vw;display:inline-block">
+<img src="https://user-images.githubusercontent.com/80824268/210171498-43102dda-46c5-4214-b9fb-8b29a002b30e.png" style="position:relative;width:25vw;display:inline-block">
 </td>
 <td width="50%">
-<img src="https://user-images.githubusercontent.com/11832290/182314911-33e9c7f4-33f3-4c5e-b216-9b63f2753979.png" style="position:relative;width:25vw;display:inline-block">
+<img src="https://user-images.githubusercontent.com/80824268/210171497-a3732ae2-08b5-4784-9901-fce865ce8a77.png" style="position:relative;width:25vw;display:inline-block">
 </td>
 </tr>
 </table>
