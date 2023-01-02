@@ -52,10 +52,6 @@
 #var d11
 #var d12
 #var d13$
-#var d14$
-#var d15
-#var d16
-#var d17$
 
 #const c_wall=1
 #const c_ground=2

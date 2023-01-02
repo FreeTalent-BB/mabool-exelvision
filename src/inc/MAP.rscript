@@ -3,7 +3,7 @@
 ;
 #label load_level
 	If !LEVEL_COLOR>7 Then !LEVEL_COLOR=1
-	!LCOL$ = SEG$("RGMCBYW",!LEVEL_COLOR, 1 )
+	!LCOL$ = SEG$("RGMCbYW",!LEVEL_COLOR, 1 )
 
 	If !LEVEL = 1 Then Restore @map1$
 	If !LEVEL = 2 Then Restore @map2$
@@ -24,21 +24,16 @@
 	
 	Cls: !MAP_POS = 1 : !NUM_LASER = 0
 #label read_data1
-	Call Color("0WB")
-	If !LEVEL=4 Then Locate(1,1): Print Str$(!MAP_POS);:Gosub @wait_key
-	If !MAP_POS > 160 Then Goto @stop_read
+;	If !MAP_POS > 160 Then Goto @stop_read
 	
 #label read_data2
 	Read !NUM_TILES,!TILE_VALUE
-	Call Color("0WB") : Locate(2,1): Print Str$(!NUM_TILES)&", "&Str$(!TILE_VALUE);
-
 	For !FOR_VAR = 0 To !NUM_TILES - 1 : !MAP( !MAP_POS + !FOR_VAR ) = !TILE_VALUE : Next !FOR_VAR
 	!MAP_POS = !MAP_POS + !NUM_TILES
-	Call Color("0WB") : Locate(1,1): Print Str$(!MAP_POS);
 
 	If !MAP_POS > 160 Then Goto @stop_read
 	Goto @read_data2
-	Goto @read_data1
+;	Goto @read_data1
 
 #label stop_read
 	Return
@@ -76,3 +71,10 @@
 #label 1wait_key
 	Call Key1(!JOYID, !KEY_ACTION)
 	If !JOYID=32 And !KEY_ACTION=1 Then Return Else Goto @1wait_key
+
+#label wait_tempo
+	!D2 = 0
+
+#label 1wait_tempo
+	!D2=!D2+1:If !D2<100 Then Goto @1wait_tempo
+	Return

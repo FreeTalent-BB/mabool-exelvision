@@ -3,6 +3,7 @@
 	
 #label game_loop
 
+	Call Color("1"&!LCOL$&"B"):Locate(!PLAYER_Y, !PLAYER_X )
 	If !NUM_KEY = 0 And !NUM_STAR = 0 Then Gosub @open_door
 	!MOVES = 0 : Call Key1(!JOYID, !KEY_ACTION)
 	If !JOYID = 129 And !KEY_ACTION=1 And !PLAYER_X < 34 Then !MOVES=1:Goto @move_right
@@ -14,7 +15,7 @@
 	Goto @game_loop
 
 #label move_right
-	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )
+;	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )	
 	If !MAP( !ADR_PLAYER + 1) = !C_BOX And !MOVES=1 Then Goto @box_right
 	If !MAP( !ADR_PLAYER + 1) = !C_SWITCH_ON And !MOVES=1 Then !MAP( !ADR_PLAYER + 1) = !C_SWITCH_OFF : Gosub @1move_right:Gosub @disable_laser : Goto @game_loop
 	If !MAP( !ADR_PLAYER + 1 ) = !C_WALL Or !MAP( !ADR_PLAYER + 1 ) = !C_DOOR_CLOSED Or !MAP( !ADR_PLAYER + 1 ) = !C_SWITCH_ON Then Goto @game_loop
@@ -30,7 +31,7 @@
 	Return
 
 #label move_left
-	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )	
+;	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )	
 	If !MAP( !ADR_PLAYER - 1) = !C_BOX And !MOVES=1 Then Goto @box_left
 	If !MAP( !ADR_PLAYER - 1) = !C_SWITCH_ON  And !MOVES=1 Then !MAP( !ADR_PLAYER - 1) = !C_SWITCH_OFF : Gosub @1move_left:Gosub @disable_laser : Goto @game_loop
 	If !MAP( !ADR_PLAYER - 1 ) = !C_WALL Or !MAP( !ADR_PLAYER - 1 ) = !C_DOOR_CLOSED Or !MAP( !ADR_PLAYER - 1 ) = !C_SWITCH_ON Then Goto @game_loop
@@ -46,7 +47,7 @@
 	Return
 
 #label move_up
-	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )	
+;	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )	
 	If !MAP( !ADR_PLAYER - 16) = !C_BOX And !MOVES=1 Then Goto @box_up
 	If !MAP( !ADR_PLAYER - 16) = !C_SWITCH_ON And !MOVES=1  Then !MAP( !ADR_PLAYER - 16) = !C_SWITCH_OFF : Gosub @1move_up:Gosub @disable_laser : Goto @game_loop
 	If !MAP( !ADR_PLAYER - 16 ) = !C_WALL Or !MAP( !ADR_PLAYER - 16 ) = !C_DOOR_CLOSED  Or !MAP( !ADR_PLAYER - 16 ) = !C_SWITCH_ON Then Goto @game_loop 
@@ -62,7 +63,7 @@
 	Return
 
 #label move_down
-	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )
+;	Call Color("1"&!LCOL$&"B") : Locate(!PLAYER_Y, !PLAYER_X )
 	If !MAP( !ADR_PLAYER + 16) = !C_BOX And !MOVES=1 Then Goto @box_down
 	If !MAP( !ADR_PLAYER + 16) = !C_SWITCH_ON And !MOVES=1 Then !MAP( !ADR_PLAYER + 16) = !C_SWITCH_OFF : Gosub @1move_down:Gosub @disable_laser : Goto @game_loop
 	If !MAP( !ADR_PLAYER + 16 ) = !C_WALL Or !MAP( !ADR_PLAYER + 16 ) = !C_DOOR_CLOSED Or !MAP( !ADR_PLAYER + 16 ) = !C_SWITCH_ON Then Goto @game_loop
@@ -155,7 +156,8 @@
 	!SCORE=!SCORE+10 : Gosub @update_infos : !NUM_KEY = !NUM_KEY - 1:Return
 
 #label open_door
-	Call Color("1"&!LCOL$&"B") : !MAP( !ADR_DOOR ) = !C_DOOR_OPENED : Locate(!DOOR_Y,!DOOR_X)
+	;Call Color("1"&!LCOL$&"B")
+	!MAP( !ADR_DOOR ) = !C_DOOR_OPENED : Locate(!DOOR_Y,!DOOR_X)
 	Print Chr$( 43 )&Chr$( 44 ):Locate(!DOOR_Y+1,!DOOR_X): print Chr$( 80 )&Chr$( 81 )
 	!NUM_KEY=-1 : !NUM_STAR=-1 : Return
 	
@@ -215,7 +217,8 @@
 	!MAP( !ADR_PLAYER ) = !C_ELEVATOR:Return
 
 #label bomb
-	!NUM_BOMB = !NUM_BOMB - 1 : Call Color("1WB") 
+	!NUM_BOMB = !NUM_BOMB - 1
+	; Call Color("1"&!LCOL$&"B") 
 	If !PLAYER_Y > 2 Then Gosub @up_boom
 	If !PLAYER_Y < 20 Then Gosub @down_boom
 	If !PLAYER_X > 4 Then Gosub @left_boom
@@ -315,7 +318,8 @@
 #label disable_laser
 	For !FOR_VAR = 1 To !NUM_LASER
 		!MAP( !LASER( !FOR_VAR ) ) = !C_GROUND
-		Call Color( "1"&!LCOL$&"B"):Locate(!LASER_Y( !FOR_VAR ), !LASER_X( !FOR_VAR ) ) 
+		;Call Color( "1"&!LCOL$&"B")
+		Locate(!LASER_Y( !FOR_VAR ), !LASER_X( !FOR_VAR ) ) 
 		Print Chr$( 34 )&Chr$( 34 ):Locate(!LASER_Y( !FOR_VAR )+1, !LASER_X( !FOR_VAR ) )
 		Print Chr$( 34 )&Chr$( 34 )
 	Next !FOR_VAR
@@ -324,24 +328,21 @@
 #label perd_vie
 	Call Color( "0WB") : Locate(22,1) : Print RPT$(" ", 39);
 	Locate(22,13):Print "HAAAAAaaaaa...";
-	!LIVES = !LIVES - 1
-	For !FOR_VAR = 1 To 150 : Next !FOR_VAR
+	Gosub @wait_tempo:!LIVES = !LIVES - 1
 	If !LIVES = 0 Then Goto @game_over 
 	goto @main_start
 
 #label gagne_vie
 	Call Color( "0WB") : Locate(22,1) : Print RPT$(" ", 39);
 	Locate(22,15) : Print "EXTRA LIFE!";
-	!NEW_LIFE = 0 :	!LIVES = !LIVES + 1
-	For !FOR_VAR = 1 To 150 : Next !FOR_VAR
+	Gosub @wait_tempo:!NEW_LIFE = 0 :	!LIVES = !LIVES + 1
 	goto @main_start
 
 #label fin_niveau
 	Call Color( "0WB") : Locate(22,1) : Print RPT$(" ", 39);
 	Locate(22,15) : Print "NICE JOB!"
-	!LEVEL_COLOR=!LEVEL_COLOR+1
+	Gosub @wait_tempo:!LEVEL_COLOR=!LEVEL_COLOR+1
 	If !LEVEL_COLOR>7 Then !LEVEL_COLOR=1
-	For !FOR_VAR = 1 To 150 : Next !FOR_VAR
 	!LEVEL = !LEVEL + 1 : If !LEVEL>!C_MAX_LEVELS Then Goto @congratulations
 	!NEW_LIFE = !NEW_LIFE + 1 : If !NEW_LIFE = 5 Then goto @gagne_vie
 	goto @main_start
@@ -353,9 +354,8 @@
 	Locate( 12,18 ) : Call Color("0RBH") : Print"OVER"
 	Call Color( "0WBH") : Locate( 17,5): Print "FINAL SCORE:"&Str$(!SCORE)
 	Locate( 18,5):Print "FINAL SCORE:"&Str$(!SCORE)
-	For !FOR_VAR=1 To 50:Next !FOR_VAR
 	!LEVEL=1:!LEVEL_COLOR=1:!LIVES=4:!SCORE=0
-	Goto @main_start
+	Gosub @wait_key:Goto @main_start
 	
 #label congratulations
 	Cls : Locate( 9,13 ) : Call Color("0GBH") : Print"CONGRATULATIONS!"
@@ -364,9 +364,8 @@
 	Locate( 12,5 ) : Call Color("0YBH") : Print"THANK YOU FOR PLAYING MABOOL!"
 	Call Color( "0WBH") : Locate( 17,5): Print "FINAL SCORE:"&Str$(!SCORE)
 	Locate( 18,5):Print "FINAL SCORE:"&Str$(!SCORE)
-	For !FOR_VAR=1 To 5000:Next !FOR_VAR
 	!LEVEL=1:!LEVEL_COLOR=1:!LIVES=4:!SCORE=0
-	Goto @main_start
+	Gosub @wait_key:Goto @main_start
 	
 ;1
 #label tile_wall

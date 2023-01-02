@@ -9,21 +9,17 @@
 ; |__/     |__/|__/  |__/|_______/  \______/  \______/ |________/
 ;
 ;                 Baptiste BIDEAUX (c)2022.
-;        https://github.com/FreeTalent-BB/mabool-vg5000
+;        https://github.com/FreeTalent-BB/mabool-exelvision
 
-#tmx2bas "source":"./map/map.tmx","c":"rle","f":"dec","rl":"yes","max":32,"o":"./inc/MAPDATA.rscript"
 #INCLUDE inc.VARS
-
-Gosub @check_joystick
-Goto @main_start
-
-#INCLUDE inc.MAP
-#INCLUDE inc.GAME
-
 #INCLUDE inc.MAPDATA
-#INCLUDE inc.JOYTESTER
 
-#label main_start
-	Gosub @load_level/
-	Gosub @show_level/
-	Goto @play_game
+Restore @map1$
+Open #4,"1.DATA",OUPTPUT,VARIABLE 1
+#label root
+	On ERROR @fin
+	READ A : Print #4, Str$(A)
+goto @root
+
+#label fin
+	CLOSE #4

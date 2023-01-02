@@ -9,7 +9,7 @@
 		!TITLE_X = !TITLE_X + 1:If !TITLE_X = 41 Then !TITLE_X=1:!TITLE_Y=!TITLE_Y+1
 	Next !FOR_VAR
 
-	CALL COLOR( "0WB") : Locate(9,14) : Print "PRESS FIRE";
+	CALL COLOR( "0WB") : Locate(9,14) : Print "PRESS SPACEBAR";
 	CALL COLOR( "0YB"):Locate(22,9): Print "BAPTISTE BIDEAUX (c)2022.";
 	Return
 
@@ -17,11 +17,10 @@
 
 	Restore @icons
 	For !FOR_VAR=1 To 9
-		Read !d1$,!d2,!d3,!d4,!d5,!d6,!d7,!d8,!d9,!d10$,!d11,!d12,!d13$,!d14$,!d15,!d16,!d17$
+		Read !d1$,!d2,!d3,!d4,!d5,!d6,!d7,!d8,!d9,!d10$,!d11,!d12,!d13$
 		Call Color( !d1$ ):locate(!d2,!d3):Print chr$(!d4)&chr$(!d5)
 		locate(!d6,!d7):Print chr$(!d8)&chr$(!d9)
 		Call Color( !d10$ ):locate(!d11,!d12):Print !d13$
-		Call Color( !d14$ ):locate(!d15,!d16):Print !d17$
 	Next !FOR_VAR
 	Return
 
@@ -44,21 +43,12 @@ DATA 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 DATA 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 
 #label icons
-Data "1WB",10,2,50,51,11,2,88,89,"0CB"
-Data 10,6,"MABOOL","0YB",11,6,"SPHERICAL HERO"
-Data "1WB",13,1,58,59,14,1,96,97,"0CB"
-Data 13,6,"STAR & KEY","0YB",14,6,"GET THEM ALL"
-Data "1WB",13,3,62,63,14,3,100,101,"0CB"
-Data 13,3,"","0YB",14,6,""
-Data "1WB",16,2,41,42,17,2,78,79,"0CB"
-Data 16,6,"EXIT DOOR","0YB",11,6,""
-Data "1WB",19,2,66,67,20,2,104,105,"0CB"
-Data 19,6,"BOMB","0YB",20,6,"DESTROY WALL"
-Data "1WB",10,22,35,36,11,22,72,73,"0CB"
-Data 10,26,"ELEVATOR","0YB",11,6,""
-Data "1WB",13,22,37,38,14,22,74,75,"0CB"
-Data 13,26,"TELEPORTER","0YB",11,6,""
-Data "1WB",16,22,39,40,17,22,76,77,"0CB"
-Data 16,26,"BROKEN GROUND","0YB",11,6,""
-Data "1WB",19,22,45,46,20,22,82,83,"0CB"
-Data 19,26,"LASER SWITCH","0YB",11,6,""
+Data "1WB",10,2,50,51,11,2,88,89,"0CB",10,6,"MABOOL"
+Data "1WB",13,1,58,59,14,1,96,97,"0CB",13,6,"STAR & KEY"
+Data "1WB",13,3,62,63,14,3,100,101,"0CB",13,3,""
+Data "1WB",16,2,41,42,17,2,78,79,"0CB",16,6,"EXIT DOOR"
+Data "1WB",19,2,66,67,20,2,104,105,"0CB",19,6,"BOMB"
+Data "1WB",10,22,35,36,11,22,72,73,"0CB",10,26,"ELEVATOR"
+Data "1WB",13,22,37,38,14,22,74,75,"0CB",13,26,"TELEPORTER"
+Data "1WB",16,22,39,40,17,22,76,77,"0CB",16,26,"BROKEN GROUND"
+Data "1WB",19,22,45,46,20,22,82,83,"0CB",19,26,"LASER SWITCH"
