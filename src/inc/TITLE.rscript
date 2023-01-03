@@ -1,7 +1,6 @@
 #label draw_title
 	RESTORE @title : Cls : !TITLE_X = 1 : !TITLE_Y = 1
-	For !FOR_VAR = 1 To 320
-		Read !TITLE_VALUE : Locate(!TITLE_Y,!TITLE_X)
+	For !FOR_VAR = 1 To 320:Read !TITLE_VALUE : Locate(!TITLE_Y,!TITLE_X)
 		If !TITLE_VALUE = 0 Then CALL COLOR("1bB") : Print Chr$(34);
 		If !TITLE_VALUE = 1 Then CALL COLOR("1CB") : Print Chr$(34);
 		If !TITLE_VALUE = 2 Then CALL COLOR("1WB") : Print Chr$(115);
